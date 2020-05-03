@@ -1,0 +1,31 @@
+{
+  "window": {
+    "navigationBarBackgroundColor": "#4D4D4D",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "小程序",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
+  },
+  "pages": [
+    "pages/DailyReport/DailyReport",
+    "pages/PersonalCenter/PersonalCenter",
+    "pages/QRcode/QRcode"
+  ],
+  "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#1296db",
+    "list": [{
+      "pagePath": "pages/DailyReport/DailyReport",
+      "text": "健康打卡",
+      "iconPath": "/static/img/tabbar/daka_nor.png",
+      "selectedIconPath": "/static/img/tabbar/daka_sel.png"
+    },{
+      "pagePath": "pages/PersonalCenter/PersonalCenter",
+      "text": "个人中心",
+      "iconPath": "/static/img/tabbar/center_nor.png",
+      "selectedIconPath": "/static/img/tabbar/center_sel.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json"
+}

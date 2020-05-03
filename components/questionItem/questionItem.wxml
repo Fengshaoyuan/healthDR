@@ -1,0 +1,22 @@
+<view class="questionMsg" hidden="{{questionItem.hidden}}">
+  <view class="desc">{{questionItem.desc}}</view>
+  <view class="radio" wx:if="{{questionItem.type==1}}">
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label wx:for="{{questionItem.option}}" wx:key="id"> 
+        <view class="choice">
+          <radio value="{{item.value}}"></radio>
+          <text>{{item.value}}</text>
+        </view>
+      </label>
+    </radio-group>
+  </view>
+
+  <view class="location" wx:elif="{{questionItem.type==2}}">
+    <input readonly type="text" placeholder="在此输入信息"/>
+  </view>
+
+  <view class="location" wx:elif="{{questionItem.type==3}}">
+    <input readonly type="text" placeholder="点击获取地理位置(Click to get your location)"/>
+  </view>
+  
+</view>

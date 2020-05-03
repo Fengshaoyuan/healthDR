@@ -1,0 +1,9 @@
+<view class="cardItem">
+  <view class="icon">
+    <image src="{{cardItem.img}}" mode="aspecttoFill"/>
+  </view>
+  <view class="desc">
+    <text class="cardTitle">{{cardItem.title}}</text>
+    <text class="cardDesc">{{cardItem.description}}</text>
+  </view>
+</view>

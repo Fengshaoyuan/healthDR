@@ -1,0 +1,5 @@
+<view class="cardContainer">
+  <block wx:for="{{cardItems}}" wx:key="id">
+    <cardItem cardItem="{{item}}"/>
+  </block>
+</view>

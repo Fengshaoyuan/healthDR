@@ -1,0 +1,20 @@
+<view class="baseMsg">
+  <view class="desc">今日日期\t Date</view>
+  <text>{{date}}</text>
+</view>
+<view class="baseMsg">
+  <view class="desc">姓名\t Name</view>
+  <text>{{realName}}</text>
+</view>
+<view class="baseMsg">
+  <view class="desc">学工号\t Student/Staff\t ID\t No.</view>
+  <text>{{studentID}}</text>
+</view>
+
+<view class="questionContainer">
+  <block wx:for="{{questionItems}}" wx:key="id">
+    <questionItem questionItem="{{item}}"/>
+  </block>
+</view>
+
+<a class="confirm">提交信息\t Submit information</a>

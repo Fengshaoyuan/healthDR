@@ -1,0 +1,7 @@
+{
+  "navigationBarBackgroundColor": "#8B8989",
+  "navigationBarTitleText": "个人中心",
+  "usingComponents": {
+    "cardItem": "/components/cardItem/cardItem"
+  }
+}

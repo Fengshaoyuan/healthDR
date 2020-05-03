@@ -1,0 +1,20 @@
+.questionMsg,
+.location {
+  border-bottom: 1px solid #e5e5e5;
+  margin: 0 .3733333333rem;
+  padding: .5333333333rem 0;
+}
+
+.desc {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: .2666666667rem;
+}
+
+.radio-group {
+  display: block;
+}
+
+.choice {
+  height: 2rem;
+}

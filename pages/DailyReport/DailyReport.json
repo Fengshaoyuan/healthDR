@@ -1,0 +1,7 @@
+{
+  "navigationBarBackgroundColor": "#1C86EE",
+  "navigationBarTitleText": "健康打卡",
+  "usingComponents": {
+    "questionItem": "/components/questionItem/questionItem"
+  }
+}
