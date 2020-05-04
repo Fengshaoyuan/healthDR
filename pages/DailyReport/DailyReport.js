@@ -336,6 +336,12 @@ Page({
         hidden: true,
         desc: "境内交通工具班次（航班号，火车车次，汽车牌照） Transportation details in Chinese Mainland (Flight number, train number, license plate)",
         answer: ""
+      },{
+        type: 1,
+        hidden: false,
+        option: [
+          { id: 1, value: "本人承诺：\n上述信息真实准确。如有变化，及时更新相关信息并报告所在单位。\n本人已知晓并将遵守政府和学校相关规定，配合做好疫情防控工作。\nI agree:\nThe above information is true and accurate. In case of changes, I will keep my information updated and report in a timely manner.\nI have understood and will abide by the relevant government and University regulations to facilitate the prevention and control of COVID-19 epidemic." }
+        ]
       }
     ]
   },

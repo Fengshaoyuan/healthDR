@@ -12,9 +12,6 @@
 }
 
 .radio-group {
-  display: block;
+  display: flex;
 }
 
-.choice {
-  height: auto;
-}
