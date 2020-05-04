@@ -1,18 +1,27 @@
 // pages/QRcode/QRcode.js
+var util = require('../../utils/util.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    time: "",
+    realname: "张三",
+    studentID: "3170100001",
+    college: "地球科学学院",
+    healthColor: "00a650"
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var TIME = util.formatTime(new Date());
+    this.setData({
+    time: TIME,
+    });
   },
 
   /**

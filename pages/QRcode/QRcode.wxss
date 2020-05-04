@@ -1,1 +1,26 @@
 /* pages/QRcode/QRcode.wxss */
+.msg {
+  background-color: #53868B;
+  padding-bottom: .667rem;
+  border-radius: .667rem;
+  margin: .333rem .333rem;
+}
+
+.msg text {
+  color: white;
+  font-size: 1em;
+  margin-left: 10%;
+  padding-top: .667rem;
+  font-weight: bold;
+  display: block;
+}
+
+.QRcode {
+  text-align: center;
+}
+
+.tips text{
+  text-align: center;
+  display: block;
+  font-size: small;
+}
