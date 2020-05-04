@@ -16,5 +16,5 @@
 }
 
 .choice {
-  height: 2rem;
+  height: auto;
 }
