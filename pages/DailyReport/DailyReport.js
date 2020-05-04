@@ -44,7 +44,7 @@ Page({
       },{
         type: 1,
         name: "bztcyy",
-        hidden: false,
+        hidden: true,
         desc: "当前地点与上次不在同一城市，原因如下 Current location is different from last time，why",
         option: [
           { id: 1, value: "探亲" },

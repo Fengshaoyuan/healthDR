@@ -1,18 +1,18 @@
 .cardItem {
-  height: 100px;
-  border-bottom: 5px;
+  height: 200rpx;
+  border-bottom: 10rpx;
   display: flex;
-  border-radius: 10px;
-  margin: 40px 20px;
-  box-shadow: 2px 2px 5px 2px gray;
+  border-radius: 20rpx;
+  margin: 80rpx 40rpx;
+  box-shadow: 4rpx 4rpx 10rpx 4rpx gray;
 }
 
 .cardItem .icon {
-  width: 80px;
-  height: 80px;
-  margin: 10px;
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx;
   margin-right: 0;
-  border-radius: 6px;
+  border-radius: 12rpx;
 }
 
 .cardItem .icon image {
@@ -23,20 +23,19 @@
 .cardItem .desc {
   /* background-color: cyan; */
   flex: 1;
-  padding: 10px;
+  padding: 20rpx;
   display: flex;
   flex-direction: column;
 }
 
 .cardItem .desc text {
-  margin-top: 10px;
-  margin-left: 17px;
-  font-size: 13px;
+  margin-top: 20rpx;
+  margin-left: 35rpx;
   display: block; 
 }
 
 .cardItem .desc .cardTitle {
-  font-size: 18px;
+  font-size: larger;
   font-weight: bold;
 }
 

@@ -3,33 +3,33 @@ page{background-color:#d9fcfc;}
 
 .msg {
   background-color: #2663b3;
-  padding-bottom: .667rem;
-  border-radius: .667rem;
-  margin: .333rem 1rem;
+  padding-bottom: 22rpx;
+  border-radius: 22rpx;
+  margin: 12rpx 32rpx;
   color: white;
-  padding-top: .667rem;
+  padding-top: 22rpx;
   font-size: medium;
 }
 
 .msg text {
-  margin-left: .667rem;
+  margin-left: 22rpx;
   font-weight: bold;
 }
 
 .msg view {
-  margin-left: 1.667rem;
+  margin-left: 80rpx;
 }
 
 .QRcode {
   background-color: white;
-  border-radius: .667rem;
-  margin: .666rem 1rem;
+  border-radius: 22rpx;
+  margin: 22rpx 32rpx;
   text-align: center;
-  box-shadow: 0 .111rem .333rem .111rem #DDDDDD;
+  box-shadow: 0 6rpx 4rpx 6rpx #DDDDDD;
 }
 
 .date {
-  padding-top: 1rem;
+  padding-top: 32rpx;
   font-size: larger;
   font-weight: bold;
 }
@@ -38,5 +38,5 @@ page{background-color:#d9fcfc;}
   text-align: center;
   display: block;
   font-size: small;
-  padding-bottom: 1rem;
+  padding-bottom: 32rpx;
 }

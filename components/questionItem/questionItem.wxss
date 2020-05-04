@@ -1,14 +1,13 @@
 .questionMsg,
 .location {
-  border-bottom: 1px solid #e5e5e5;
-  margin: 0 .3733333333rem;
-  padding: .5333333333rem 0;
+  border-bottom: 2rpx solid #e5e5e5;
+  margin: 5rpx;
+  padding: 10rpx 0;
 }
 
 .desc {
-  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: .2666666667rem;
+  margin-bottom: 6rpx;
 }
 
 .optionItem {

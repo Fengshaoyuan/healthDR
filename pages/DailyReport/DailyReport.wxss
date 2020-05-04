@@ -1,29 +1,28 @@
 .baseMsg{
-  border-bottom: 1px solid #e5e5e5;
-  margin: 0 .3733333333rem;
-  padding: .5333333333rem 0;
+  border-bottom: 2rpx solid #e5e5e5;
+  margin: 0 18rpx;
+  padding: 12rpx 0;
 }
 
 .baseMsg .desc {
-  font-size: 1em;
   font-weight: bold;
-  margin-bottom: .2666666667rem;
+  margin-bottom: 12rpx;
 }
 
 .baseMsg text {
-  padding: .24rem .3733333333rem;
+  padding: 12rpx 18rpx;
   display: inline-block;
   font-size: medium;
-  border: 1px solid #eee;
+  border: 2rpx solid #eee;
   width: 95%;
   vertical-align: middle;
 }
 
 .confirm {
-  margin: 1rem 1rem;
+  margin: 32rpx 32rpx;
   background: #4285f4;
-  height: 2.5rem;
-  border-radius: .333rem;
+  height: 80rpx;
+  border-radius: 10rpx;
   color: white;
   align-items: center;
   display: flex;
