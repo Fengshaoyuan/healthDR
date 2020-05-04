@@ -1,10 +1,12 @@
 <view class="questionMsg" hidden="{{questionItem.hidden}}">
   <view class="desc">{{questionItem.desc}}</view>
   <view class="option" wx:if="{{questionItem.type==1}}">
-    <view class="radio-group" bindchange="radioChange" wx:for="{{questionItem.option}}" wx:key="id">
-      <radio class="radio" value="{{item.value}}"></radio>
-      <text class="value">{{item.value}}</text>
-    </view>
+    <radio-group class="radio-group" bindchange="radioChange" >
+      <view class="optionItem" wx:for="{{questionItem.option}}" wx:key="id"> 
+        <radio class="radio" value="{{item.value}}"></radio>
+        <view class="value">{{item.value}}</view>
+      </view>
+    </radio-group>
   </view>
 
   <view class="location" wx:elif="{{questionItem.type==2}}">

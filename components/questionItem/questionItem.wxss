@@ -11,7 +11,7 @@
   margin-bottom: .2666666667rem;
 }
 
-.radio-group {
+.optionItem {
   display: flex;
 }
 
