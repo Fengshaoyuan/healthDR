@@ -1,4 +1,10 @@
 # 健康打卡0.1
-更新了基础UI界面，预览图如下：
-![健康打卡界面](http://blog.qqhsfa.com/wp-content/uploads/2020/05/Screenshot_2020-05-04-00-33-09-619_com.tencent.mm_.png)
-![个人中心界面](http://blog.qqhsfa.com/wp-content/uploads/2020/05/Screenshot_2020-05-04-00-33-03-383_com.tencent.mm_.jpg)
+目前完成的基础功能包括每日打卡、个人中心、健康码
+## 每日打卡
+![image.png](/uploads/D03625343ED541A29E053E3832B825E6/image.png)
+![image.png](/uploads/DA30B67CE79E49B6BABDA5BDB7BBFF3C/image.png)
+## 个人中心
+![image.png](/uploads/20BE6032AD0E4754B3EC1397F4B416E8/image.png)
+## 健康码
+二维码调用的api为`http://qr.liantu.com/api.php?text=`
+![image.png](/uploads/DF199CA89BDA4444AF62AECE639254A7/image.png)
