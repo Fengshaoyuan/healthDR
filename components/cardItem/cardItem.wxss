@@ -42,5 +42,4 @@
 
 .cardItem .desc .cardDesc {
   color: gray;
-
 }

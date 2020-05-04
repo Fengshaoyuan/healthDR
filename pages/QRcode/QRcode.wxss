@@ -1,26 +1,42 @@
 /* pages/QRcode/QRcode.wxss */
+page{background-color:#ccffff;}
+
 .msg {
-  background-color: #53868B;
+  background-color: #2663b3;
   padding-bottom: .667rem;
   border-radius: .667rem;
-  margin: .333rem .333rem;
+  margin: .333rem 1rem;
+  color: white;
+  padding-top: .667rem;
+  font-size: medium;
 }
 
 .msg text {
-  color: white;
-  font-size: 1em;
-  margin-left: 10%;
-  padding-top: .667rem;
+  margin-left: .667rem;
   font-weight: bold;
-  display: block;
+}
+
+.msg view {
+  margin-left: 1.667rem;
 }
 
 .QRcode {
+  background-color: white;
+  border-radius: .667rem;
+  margin: .666rem 1rem;
   text-align: center;
+  box-shadow: 0 .111rem .333rem .111rem #DDDDDD;
+}
+
+.date {
+  padding-top: 1rem;
+  font-size: larger;
+  font-weight: bold;
 }
 
 .tips text{
   text-align: center;
   display: block;
   font-size: small;
+  padding-bottom: 1rem;
 }

@@ -1,13 +1,14 @@
 <!--pages/QRcode/QRcode.wxml-->
 <view class="msg">
-  <text decode="{{true}}">&emsp;&emsp;姓名：{{realname}}</text>
-  <text decode="{{true}}">&emsp;&emsp;学号：{{studentID}}</text>
-  <text decode="{{true}}">&emsp;&emsp;学院：{{college}}</text>
-  <text>更新时间：{{time}}</text>
+  <view>姓名:<text class="data">{{realname}}</text></view> 
+  <view>学号:<text class="data">{{studentID}}</text></view> 
+  <view>学院:<text class="data">{{college}}</text></view> 
 </view>
+
 <view class="QRcode">
-  <image src="http://qr.liantu.com/api.php?&fg={{healthColor}}&text=姓名：{{realname}}%0A学号：{{studentID}}%0A学院：{{college}}%0A更新时间：{{time}}" mode="aspectFit"></image>
-</view>
-<view class="tips">
-  <text>让对方扫描此二维码进行身份认证</text>
+  <view class="date">{{time}}</view>
+  <image src="http://qr.liantu.com/api.php?&fg={{healthColor}}&text=姓名：{{realname}}%0A学号：{{studentID}}%0A学院：{{college}}%0A更新时间：{{time}}" mode="heightFix"></image>
+  <view class="tips">
+    <text>让对方扫描此二维码进行身份认证</text>
+  </view>
 </view>
