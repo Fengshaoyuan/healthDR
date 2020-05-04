@@ -25,7 +25,7 @@ page{background-color:#d9fcfc;}
   border-radius: 22rpx;
   margin: 22rpx 32rpx;
   text-align: center;
-  box-shadow: 0 6rpx 4rpx 6rpx #DDDDDD;
+  box-shadow: 0 6rpx 4rpx 4rpx #DDDDDD;
 }
 
 .date {
