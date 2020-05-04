@@ -1,5 +1,5 @@
 /* pages/QRcode/QRcode.wxss */
-page{background-color:#ccffff;}
+page{background-color:#d9fcfc;}
 
 .msg {
   background-color: #2663b3;
