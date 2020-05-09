@@ -1,11 +1,11 @@
 <view class="questionMsg" hidden="{{questionItem.hidden}}">
   <view class="desc">{{questionItem.desc}}</view>
   <view class="option" wx:if="{{questionItem.type==1}}">
-    <radio-group class="radio-group" bindchange="radioChange" >
-      <view class="optionItem" wx:for="{{questionItem.option}}" wx:key="id"> 
-        <radio class="radio" value="{{item.value}}"></radio>
+    <radio-group name="{{questionItem.name}}" class="radio-group" bindchange="radioChange" >
+      <lable class="optionItem" wx:for="{{questionItem.option}}" wx:key="name"> 
+        <radio class="radio" value="{{item.id}}"/>
         <view class="value">{{item.value}}</view>
-      </view>
+      </lable>
     </radio-group>
   </view>
 
@@ -18,3 +18,4 @@
   </view>
   
 </view>
+

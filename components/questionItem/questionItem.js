@@ -19,7 +19,12 @@ Component({
    */
   methods: {
     radioChange: function (e) {
-      console.log('radio发生change事件，携带value值为：', e.detail.value)
+      let name = this.data.questionItem.name,value = e.detail.value
+      console.log('radio发生change事件，携带value值为：',this.data.questionItem.name,e.detail.value)
+      if(name == "sfzx" && value == 2) {
+        console.log("yes")
+      }
+      
     }
   }
 })

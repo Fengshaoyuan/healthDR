@@ -7,10 +7,29 @@ Page({
    * 页面的初始数据
    */
   data: {
+    canSubmit: false,
     date: "",
     realName: "张三",
     studentID: "3170100001",
     location: "",
+    questionare: [
+      {
+      type: 1,
+        name: "sfzx",
+        hidden: false,
+        desc: "今日是否在校？ Are you on campus today?",
+        option: [
+          { id: 1, value: "是 Yes" },
+          { id: 2, value: "否 No" }
+        ]
+      },{
+        type: 2,
+        name: "fxyy",
+        hidden: true,
+        desc: "返校原因 Reason for returning to school",
+        answer: ""
+      }
+    ],
     questionItems: [
       {
         type: 1,
@@ -350,10 +369,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var DATE = util.formatDate(new Date());
+    var DATE = util.formatDate(new Date())
     this.setData({
     date: DATE,
-    });
+    })
   },
 
   /**
