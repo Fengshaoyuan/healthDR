@@ -3,15 +3,15 @@ var util = require('../../utils/util.js');
 
 Page({
   radioChange: function (e) {
+    // 将传入的value值转换为字符串数组
     let arr = e.detail.value.split(',')
-    console.log(arr[0])
     let str = "message." + arr[0]
     this.setData({
-      [str]: arr[1],
-      'questionnaire[10].visible': (this.data.message.sfyyjc == 0),
-      'questionnaire[11].visible': (this.data.message.sfyyjc == 0),
-      'questionnaire[12].visible': (this.data.message.sfyyjc == 0),
+      [str]: arr[1], //这一步相当坑爹，[]中可以存放自定义的数据名，算是ES5的语法不扎实吧
     })
+
+    // 为每次选项更改事件判定，是否选中了会产生二级问题的问题，并更新相应问题的hidden属性，此处语法有待改进
+    // 实测直接合并设置this.setData（{})会导致莫名BUG，应该是每次触发函数都判断了的问题
     if(arr[0] == "sfzx") {
       this.setData({
       'questionnaire[1].visible': (this.data.message.sfzx == 0),
@@ -83,7 +83,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    canSubmit: false,
+    canSubmit: false, //是否可以点击提交按钮
+    // 基础信息和问题选择结果数据，这是用于上传的数据
     message: {
       date: "",
       realName: "张三",
@@ -107,6 +108,7 @@ Page({
       sfsqhzjkk: 1,
       sfymqjczrj: 1
     },
+    // 问卷数据
     questionnaire: [
       {
         id: 0,
@@ -401,6 +403,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //使用utils获取时间信息
     var DATE = util.formatDate(new Date())
     this.setData({
     'message.date': DATE

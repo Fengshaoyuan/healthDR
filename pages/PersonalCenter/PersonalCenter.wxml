@@ -1,4 +1,5 @@
 <view class="cardContainer">
+  <!-- 循环渲染个人中心卡片，调用自定义卡片组件 -->
   <block wx:for="{{cardItems}}" wx:key="id">
     <cardItem cardItem="{{item}}"/>
   </block>

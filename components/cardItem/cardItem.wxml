@@ -1,4 +1,5 @@
 <view class="cardItem">
+  <!-- 简单的数据绑定，主要是wxss上的修改 -->
   <view class="icon">
     <image src="{{cardItem.img}}" mode="aspecttoFill"/>
   </view>

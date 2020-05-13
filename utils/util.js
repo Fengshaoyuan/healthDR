@@ -1,3 +1,4 @@
+// 当前日期+时间
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -9,6 +10,7 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+// 当前日期
 const formatDate = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1

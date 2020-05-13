@@ -1,12 +1,14 @@
-<!--pages/QRcode/QRcode.wxml-->
+<!-- 基础信息 -->
 <view class="msg">
   <view>姓名:<text class="data">{{realname}}</text></view> 
   <view>学号:<text class="data">{{studentID}}</text></view> 
   <view>学院:<text class="data">{{college}}</text></view> 
 </view>
 
+<!-- 健康码部分 -->
 <view class="QRcode">
   <view class="date">{{time}}</view>
+  <!-- 使用的api为http://qr.liantu.com/api.php? 扫码结果为个人信息文字-->
   <image src="http://qr.liantu.com/api.php?&fg={{healthColor}}&text=姓名：{{realname}}%0A学号：{{studentID}}%0A学院：{{college}}%0A更新时间：{{time}}" mode="heightFix" show-menu-by-longpress="{{true}}"></image>
   <view class="tips">
     <text>让对方扫描此二维码进行身份认证</text>
