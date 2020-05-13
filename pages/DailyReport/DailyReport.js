@@ -2,9 +2,6 @@
 var util = require('../../utils/util.js');
 
 Page({
-  // _handlerRadio: function () {
-    
-  // },
   radioChange: function (e) {
     let arr = e.detail.value.split(',')
     console.log(arr[0])
@@ -224,7 +221,7 @@ Page({
         option: ["是 Yes" ,"否 No" ]
       },{
         id: 16,
-        type: 1,
+        type: 2,
         name: "jcqzrq",
         visible: false,
         desc: "接触确诊人群时间 When did you met the Novel coronavirus pneumonia patient today?",

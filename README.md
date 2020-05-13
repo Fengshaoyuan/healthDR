@@ -1,4 +1,6 @@
-# 健康打卡0.2
+# 健康打卡 v0.3
+- 
+# 健康打卡 v0.2
 目前完成的基础功能包括每日打卡、个人中心、健康码(暂时未启用云开发)
 ## 每日打卡
 ![YEMMPP.png](https://s1.ax1x.com/2020/05/06/YEMMPP.png)![YEMQ8f.png](https://s1.ax1x.com/2020/05/06/YEMQ8f.png)
