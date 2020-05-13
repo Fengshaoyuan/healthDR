@@ -1,25 +1,42 @@
 <form class="questionare">
   <view class="baseMsg">
     <view class="desc">今日日期\t Date</view>
-    <text>{{date}}</text>
+    <text>{{message.date}}</text>
   </view>
   <view class="baseMsg">
     <view class="desc">姓名\t Name</view>
-    <text>{{realName}}</text>
+    <text>{{message.realName}}</text>
   </view>
   <view class="baseMsg">
     <view class="desc">学工号\t Student/Staff\t ID\t No.</view>
-    <text>{{studentID}}</text>
+    <text>{{message.studentID}}</text>
   </view>
 
-  <view class="questionContainer">
-    <block wx:for="{{questionItems}}" wx:key="id">
-      <questionItem questionItem="{{item}}"/>
-    </block>
-  </view>
+<view class="questionContainer">
+  <block wx:for="{{questionnaire}}" wx:key="id" wx:for-item="question">
+    <view class="questionMsg" hidden="{{!question.visible}}">
+      <view class="desc">{{question.desc}}</view>
+      <view class="option" wx:if="{{question.type==1}}">
+        <radio-group name="{{question.name}}" class="radio-group" bindchange="radioChange" >
+          <lable class="optionItem" wx:for="{{question.option}}" wx:key="*this" wx:for-item="option"> 
+            <radio class="radio" value="{{[question.name,index]}}" />
+            <text class="value">{{option}}</text>
+          </lable>
+        </radio-group>
+      </view>
+
+      <view class="inputs" wx:elif="{{question.type==2}}">
+        <input readonly type="text" placeholder="在此输入信息"/>
+      </view>
+
+      <view class="inputs" wx:elif="{{question.type==3}}">
+        <text>点击获取地理位置(Click to get your location)</text>
+      </view>
+      
+    </view>
+  </block>
+</view>
 
 </form>
-
-
 
 <button class="confirm" type="submit" disabled="{{!canSubmit}}">提交信息\t Submit information</button> 
