@@ -53,10 +53,9 @@
   margin: 32rpx 32rpx;
   background: #4285f4;
   height: 80rpx;
-  width: 100%;
   border-radius: 10rpx;
   color: white;
   align-items: center;
-  display: block;
+  display: flex;
   justify-content: center;
 }

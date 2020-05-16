@@ -1,7 +1,5 @@
 /* miniprogram/pages/signin/signin.wxss */
 /**index.wxss**/
-@import "../../style/weui.wxss";
-
 page {
   background: #f6f6f6;
   display: flex;

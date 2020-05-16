@@ -50,6 +50,14 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap.json",
-  "style": "v2"
+   "networkTimeout": {
+    "request": 5000,
+    "downloadFile": 5000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序定位" 
+    }
+  },
+  "sitemapLocation": "sitemap.json"
 }
