@@ -1,0 +1,42 @@
+.questionMsg {
+  border-bottom: 2rpx solid #e5e5e5;
+  margin: 10rpx 18rpx;
+  padding: 20rpx 0;
+}
+
+.location { 
+  padding: 12rpx 18rpx;
+  display: inline-block;
+  font-size: medium;
+  border: 2rpx solid #eee;
+  width: 95%;
+  vertical-align: middle;
+} 
+ 
+.desc { 
+  height: auto;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+} 
+ 
+.optionItem { 
+  display: flex; 
+} 
+
+.value {
+  font-size: 30rpx;
+}
+
+.inputs {
+  margin-left: 10rpx;
+  word-break:keep-all;
+}
+
+.answer {
+  font-size:25rpx;
+  height:60rpx;
+  width: 100%;
+  display: block;
+  overflow: auto;
+}

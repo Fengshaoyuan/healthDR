@@ -59,3 +59,8 @@
   display: flex;
   justify-content: center;
 }
+
+.sub_hover_btn {
+  position: relative;
+  transform: scale(0.99, 1);
+}

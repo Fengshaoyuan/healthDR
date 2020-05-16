@@ -1,0 +1,31 @@
+<!-- 使用hidden隐藏不可见的问题，不会降低页面的渲染性能 -->
+<view class="questionMsg" hidden="{{!questionItem.visible}}">
+  <view class="desc">{{questionItem.desc}}</view>
+  <!-- 问题选项列表渲染 -->
+  <view class="option" wx:if="{{questionItem.type==1}}">
+    <radio-group name="{{questionItem.name}}" class="radio-group" bindchange="radioChange" >
+      <lable class="optionItem" wx:for="{{questionItem.option}}" wx:key="id" wx:for-item="option"> 
+        <!-- 使用value传值（问题的name和选项的id） -->
+        <radio class="radio" value="{{[questionItem.name,index]}}" />
+        <text class="value">{{option}}</text>
+      </lable>
+    </radio-group>
+  </view>
+
+  <!-- 不同类型的问题采用不同的渲染方式 -->
+  <view class="inputs" wx:elif="{{questionItem.type==2}}">
+    <textarea class="answer" placeholder="{{questionItem.placeholder ? questionItem.placeholder : '在此输入信息'}}"/>
+  </view>
+
+  <view wx:elif="{{questionItem.type==3}}" bindtap="_getLocatin">
+    <text class="location">{{questionItem.location ? questionItem.location : "点击获取地理位置(Click to get your location)"}}</text>
+  </view>
+  
+  <view wx:elif="{{questionItem.type==4}}">
+    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+      <view class="picker">
+        当前选择: {{date}}
+      </view>
+    </picker>
+  </view>
+</view>
