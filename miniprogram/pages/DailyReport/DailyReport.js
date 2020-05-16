@@ -2,144 +2,157 @@
 var util = require('../../utils/util.js');
 
 Page({
-  // radioChange: function (e) {
-  //   // 将传入的value值转换为字符串数组
-  //   let arr = e.detail.value.split(',')
-  //   let str1 = "message." + arr[0]
-  //   let str2 = "questionnaire[" + arr[1] + "].checked"
-  //   this.setData({
-  //     [str1]: arr[2], 
-  //     [str2]: arr[2],
-  //   })
+  radioChange: function (e) {
+    // 将传入的value值转换为字符串数组
+    // let arr = e.detail.value.split(',')
+    // let str1 = "message." + name
+    // let str2 = "questionnaire[" + arr[1] + "].checked"
+    let name = e.currentTarget.id
+    let index = e.currentTarget.dataset.index
+    let str1 = "message." + name
+    let str2 = "questionnaire[" + index + "].checked"
 
-  //   if(this.data.message.location != "" && this.data.questionnaire[39].checked == 0) {
-  //     this.setData({
-  //       canSubmit: true,
-  //     })
-  //   }
-  //   // 为每次选项更改事件判定，是否选中了会产生二级问题的问题，并更新相应问题的hidden属性，此处语法有待改进
-  //   // 实测直接合并设置this.setData（{})会导致莫名BUG，应该是每次触发函数都判断了的问题
-  //   if(arr[0] == "sfzx") {
-  //     this.setData({
-  //     'questionnaire[1].visible': (this.data.message.sfzx == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "tw" || arr[0] == "sfcxtz") {
-  //     this.setData({
-  //       'questionnaire[9].visible': (this.data.message.sfcxtz == 0 || this.data.message.tw == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "sfyyjc") {
-  //     this.setData({
-  //       'questionnaire[10].visible': (this.data.message.sfyyjc == 0),
-  //       'questionnaire[11].visible': (this.data.message.sfyyjc == 0),
-  //       'questionnaire[12].visible': (this.data.message.sfyyjc == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "sfjcys") {
-  //     this.setData({
-  //     'questionnaire[14].visible': (this.data.message.sfjcys == 0),
-  //     'questionnaire[17].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
-  //     'questionnaire[18].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "sfjcqz") {
-  //     this.setData({
-  //     'questionnaire[16].visible': (this.data.message.sfjcqz == 0),
-  //     'questionnaire[17].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
-  //     'questionnaire[18].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "sfcyglq") {
-  //     this.setData({
-  //     'questionnaire[19].visible': (this.data.message.sfcyglq == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "sfcxzysx") {
-  //     this.setData({
-  //     'questionnaire[24].visible': (this.data.message.sfcxzysx == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "sfsqhzjkk") {
-  //     this.setData({
-  //     'questionnaire[26].visible': (this.data.message.sfsqhzjkk == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "sfzgn") {
-  //     this.setData({
-  //     'questionnaire[28].visible': (this.data.message.sfzgn == 1),
-  //     })
-  //   }
-  //   if(arr[0] == "sfymqjczrj") {
-  //     this.setData({
-  //     'questionnaire[29].visible': (this.data.message.sfymqjczrj == 0),
-  //     })
-  //   }
-  //   if(arr[0] == "sfyrjjh") {
-  //     this.setData({
-  //     'questionnaire[30].visible': (this.data.message.sfyrjjh == 0),
-  //     'questionnaire[31].visible': (this.data.message.sfyrjjh == 0),
-  //     'questionnaire[32].visible': (this.data.message.sfyrjjh == 0),
-  //     'questionnaire[33].visible': (this.data.message.sfyrjjh == 0),
-  //     'questionnaire[34].visible': (this.data.message.sfyrjjh == 0),
-  //     'questionnaire[35].visible': (this.data.message.sfyrjjh == 0),
-  //     'questionnaire[36].visible': (this.data.message.sfyrjjh == 0),
-  //     'questionnaire[37].visible': (this.data.message.sfyrjjh == 0),
-  //     'questionnaire[38].visible': (this.data.message.sfyrjjh == 0),
-  //     })
-  //   }
-  // },
-  // _getLocatin: function(e) {
-  //   var that = this // 方便内部函数调用
-  //   wx.showLoading({
-  //     title: '加载中',
-  //   });
-  //   wx.getLocation({
-  //     success: function (e) {
-  //       console.log(e);
-  //       const url= 'https://api.map.baidu.com/reverse_geocoding/v3/';
-  //       const ak = 'rGWeHc0togunmDu7F38CZnbB67HINaHI';
-  //       //小程序的ajax请求需要在后台安全域名配置增加 开发测试中在详情里勾选-不校验合法域名即可
-  //       wx.request({
-  //         url,
-  //         data: {
-  //           coordtype: 'wgs84ll',
-  //           ak,
-  //           location: `${e.latitude},${e.longitude}`,
-  //           output: 'json',  //格式
-  //         },
-  //         success: function (e){
-  //           console.log(e);
-  //           if(e.data.status == "0"){
-  //             let province = e.data.result.addressComponent.province
-  //             let city = e.data.result.addressComponent.city
-  //             let district = e.data.result.addressComponent.district
-  //             that.setData({
-  //               'message.location': province + " " + city + " " + district
-  //             });
-  //             console.log(e.data.result.addressComponent)
-  //             wx.hideLoading()
-  //           }else{
-  //             that.setData({
-  //               'message.location': '未知位置 Unknown location',
-  //             });
-  //             wx.hideLoading()
-  //           }
-  //         },
-  //         fail: function(e) {
-  //           wx.hideLoading()
-  //           wx.showToast({
-  //             title: '获取位置信息失败',
-  //             icon: 'none',
-  //             duration: 2000
-  //           })
-  //         } 
-  //       })
-  //     }
-  //   })
-  // },
+    console.log(str1,str2)
+    this.setData({
+      [str1]: e.detail.value, 
+      [str2]: e.detail.value,
+    })
+
+    if(this.data.message.location != "" && this.data.questionnaire[39].checked == 0) {
+      this.setData({
+        canSubmit: true,
+      })
+    }
+    // 为每次选项更改事件判定，是否选中了会产生二级问题的问题，并更新相应问题的hidden属性，此处语法有待改进
+    // 实测直接合并设置this.setData（{})会导致莫名BUG，应该是每次触发函数都判断了的问题
+    if(name == "sfzx") {
+      this.setData({
+      'questionnaire[1].visible': (this.data.message.sfzx == 0),
+      })
+    }
+    if(name == "tw" || name == "sfcxtz") {
+      this.setData({
+        'questionnaire[9].visible': (this.data.message.sfcxtz == 0 || this.data.message.tw == 0),
+      })
+    }
+    if(name == "sfyyjc") {
+      this.setData({
+        'questionnaire[10].visible': (this.data.message.sfyyjc == 0),
+        'questionnaire[11].visible': (this.data.message.sfyyjc == 0),
+        'questionnaire[12].visible': (this.data.message.sfyyjc == 0),
+      })
+    }
+    if(name == "sfjcys") {
+      this.setData({
+      'questionnaire[14].visible': (this.data.message.sfjcys == 0),
+      'questionnaire[17].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
+      'questionnaire[18].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
+      })
+    }
+    if(name == "sfjcqz") {
+      this.setData({
+      'questionnaire[16].visible': (this.data.message.sfjcqz == 0),
+      'questionnaire[17].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
+      'questionnaire[18].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
+      })
+    }
+    if(name == "sfcyglq") {
+      this.setData({
+      'questionnaire[19].visible': (this.data.message.sfcyglq == 0),
+      })
+    }
+    if(name == "sfcxzysx") {
+      this.setData({
+      'questionnaire[24].visible': (this.data.message.sfcxzysx == 0),
+      })
+    }
+    if(name == "sfsqhzjkk") {
+      this.setData({
+      'questionnaire[26].visible': (this.data.message.sfsqhzjkk == 0),
+      })
+    }
+    if(name == "sfzgn") {
+      this.setData({
+      'questionnaire[28].visible': (this.data.message.sfzgn == 1),
+      })
+    }
+    if(name == "sfymqjczrj") {
+      this.setData({
+      'questionnaire[29].visible': (this.data.message.sfymqjczrj == 0),
+      })
+    }
+    if(name == "sfyrjjh") {
+      this.setData({
+      'questionnaire[30].visible': (this.data.message.sfyrjjh == 0),
+      'questionnaire[31].visible': (this.data.message.sfyrjjh == 0),
+      'questionnaire[32].visible': (this.data.message.sfyrjjh == 0),
+      'questionnaire[33].visible': (this.data.message.sfyrjjh == 0),
+      'questionnaire[34].visible': (this.data.message.sfyrjjh == 0),
+      'questionnaire[35].visible': (this.data.message.sfyrjjh == 0),
+      'questionnaire[36].visible': (this.data.message.sfyrjjh == 0),
+      'questionnaire[37].visible': (this.data.message.sfyrjjh == 0),
+      'questionnaire[38].visible': (this.data.message.sfyrjjh == 0),
+      })
+    }
+  },
+  _getLocatin: function(e) {
+    var that = this // 方便内部函数调用
+    wx.showLoading({
+      title: '加载中',
+    });
+    wx.getLocation({
+      success: function (e) {
+        console.log(e);
+        const url= 'https://api.map.baidu.com/reverse_geocoding/v3/';
+        const ak = 'rGWeHc0togunmDu7F38CZnbB67HINaHI';
+        //小程序的ajax请求需要在后台安全域名配置增加 开发测试中在详情里勾选-不校验合法域名即可
+        wx.request({
+          url,
+          data: {
+            coordtype: 'wgs84ll',
+            ak,
+            location: `${e.latitude},${e.longitude}`,
+            output: 'json',  //格式
+          },
+          success: function (e){
+            console.log(e);
+            if(e.data.status == "0"){
+              let province = e.data.result.addressComponent.province
+              let city = e.data.result.addressComponent.city
+              let district = e.data.result.addressComponent.district
+              that.setData({
+                'message.location': province + " " + city + " " + district
+              });
+              console.log(e.data.result.addressComponent)
+              wx.hideLoading()
+            }else{
+              that.setData({
+                'message.location': '未知位置 Unknown location',
+              });
+              wx.hideLoading()
+            }
+          },
+          fail: function(e) {
+            wx.hideLoading()
+            wx.showToast({
+              title: '获取位置信息失败',
+              icon: 'none',
+              duration: 2000
+            })
+          } 
+        })
+      }
+    })
+  },
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  },
+  bindDateChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e)
+    let str2 = "questionnaire[" + e.currentTarget.dataset.index + "].date"
+    this.setData({
+      [str2]: e.detail.value
+    })
   },
   /**
    * 页面的初始数据

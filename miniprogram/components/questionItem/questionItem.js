@@ -20,9 +20,7 @@ Component({
   methods: {
     bindDateChange: function(e) {
       console.log(e.detail.value)
-      this.setData({
-        date: e.detail.value, 
-      })
+      app.changeItemDate()
     },
   }
 })
