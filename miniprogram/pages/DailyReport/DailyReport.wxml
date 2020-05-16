@@ -24,11 +24,11 @@
         <!-- 问题选项列表渲染 -->
         <view class="option" wx:if="{{question.type==1}}">
           <radio-group name="{{question.name}}" class="radio-group" bindchange="radioChange" >
-            <lable class="optionItem" wx:for="{{question.option}}" wx:key="id" wx:for-item="option"> 
+            <view class="optionItem" wx:for="{{question.option}}" wx:key="id" wx:for-item="option"> 
               <!-- 使用value传值（问题的name和选项的id） -->
-              <radio class="radio" value="{{[question.name,index]}}" />
-              <text class="value">{{option}}</text>
-            </lable>
+              <radio class="radio" value="{{[question.name,question.id,index]}}" checked="{{question.checked == index}}"/>
+              <lable class="value">{{option}}</lable>
+            </view>
           </radio-group>
         </view>
 
@@ -48,3 +48,17 @@
 </form>
 
 <button class="confirm" type="submit" disabled="{{!canSubmit}}">提交信息 Submit information</button> 
+
+<!-- <wxs module="tool">
+  function ifChecked(message,name,chose) {
+    var str = message.name
+    console.log(name)
+    if(arr[name] == chose) {
+      return true
+    }else return false
+  }
+
+  module.exports = {
+    ifChecked: ifChecked
+  }
+</wxs> -->

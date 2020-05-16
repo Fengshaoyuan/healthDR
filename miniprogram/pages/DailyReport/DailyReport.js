@@ -5,9 +5,11 @@ Page({
   radioChange: function (e) {
     // 将传入的value值转换为字符串数组
     let arr = e.detail.value.split(',')
-    let str = "message." + arr[0]
+    let str1 = "message." + arr[0]
+    let str2 = "questionnaire[" + arr[1] + "].checked"
     this.setData({
-      [str]: arr[1], //这一步相当坑爹，[]中可以存放自定义的数据名，算是ES5的语法不扎实吧
+      [str1]: arr[2], 
+      [str2]: arr[2],
     })
 
     // 为每次选项更改事件判定，是否选中了会产生二级问题的问题，并更新相应问题的hidden属性，此处语法有待改进
@@ -29,19 +31,18 @@ Page({
         'questionnaire[12].visible': (this.data.message.sfyyjc == 0),
       })
     }
-    if(arr[0] == "sfjcbh") {
+    if(arr[0] == "sfjcys") {
       this.setData({
-      'questionnaire[14].visible': (this.data.message.sfjcbh == 0),
-      'questionnaire[17].visible': (this.data.message.sfjcbh == 0 || this.data.message.sfjcqz == 0),
-      'questionnaire[18].visible': (this.data.message.sfjcbh == 0 || this.data.message.sfjcqz == 0),
-
+      'questionnaire[14].visible': (this.data.message.sfjcys == 0),
+      'questionnaire[17].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
+      'questionnaire[18].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
       })
     }
     if(arr[0] == "sfjcqz") {
       this.setData({
       'questionnaire[16].visible': (this.data.message.sfjcqz == 0),
-      'questionnaire[17].visible': (this.data.message.sfjcbh == 0 || this.data.message.sfjcqz == 0),
-      'questionnaire[18].visible': (this.data.message.sfjcbh == 0 || this.data.message.sfjcqz == 0),
+      'questionnaire[17].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
+      'questionnaire[18].visible': (this.data.message.sfjcys == 0 || this.data.message.sfjcqz == 0),
       })
     }
     if(arr[0] == "sfcyglq") {
@@ -150,9 +151,8 @@ Page({
       sffrqjwdg: 0,
       sfqtyyqjwdg: "",
       tw: 1,
-      sfcxtz: 1,
       sfyyjc: 1,
-      sfjcbh: 1,
+      sfjcys: 1,
       sfjcqz: 1,
       jrsfqzys: 1,
       jrdqtlqk: 8,
@@ -169,21 +169,24 @@ Page({
         name: "sfzx",
         visible: true,
         desc: "今日是否在校？ Are you on campus today?",
-        option: ["是 Yes" ,"否 No"]
+        option: ["是 Yes" ,"否 No"],
+        checked: 0,
       },{
         id: 1,
         type: 2,
         name: "fxyy",
         visible: false,
         desc: "返校原因 Reason for returning to school",
-        answer: ""
+        answer: "",
+        checked: 0,
       },{
         id: 2,
         type: 1,
         name: "sfzgn",
         visible: true,
         desc: "所在地点 Your Location",
-        option: ["境内 in Chinese Mainland","境外 outside Chinese Mainland"]
+        option: ["境内 in Chinese Mainland","境外 outside Chinese Mainland"],
+        checked: 0,
       },{
         id: 3,
         type: 3,
@@ -196,105 +199,116 @@ Page({
         name: "bztcyy",
         visible: false,
         desc: "当前地点与上次不在同一城市，原因如下 Current location is different from last time，why",
-        option: ["探亲" ,"旅游" ,"其他" ]
+        option: ["探亲" ,"旅游" ,"其他" ],
+        checked: 0,
       },{
         id: 5,
         type: 1,
         name: "sffrqjwdg",
         visible: true,
         desc: "今日是否因发热请假未到岗（教职工）或未返校（学生）？ Are you on leave due to fever?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 6,
         type: 1,
         name: "sfqtyyqjwdg",
         visible: true,
         desc: "今日是否因发热外的其他原因请假未到岗（教职工）或未返校（学生）？ Are you on leave due to other symptoms except fever?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 7,
         type: 1,
         name: "tw",
         visible: true,
         desc: "今日是否有发热症状（高于37.2 ℃）？ Do you have a fever(above 37.2℃) today?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 8,
         type: 1,
         name: "sfcxtz",
         visible: true,
         desc: "今日是否有咳嗽、呼吸道不畅、腹泻等其他症状？ Do you have cough, poor respiratory tract, diarrhea and other symptoms today?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 9,
         type: 1,
         name: "sfyyjc",
         visible: false,
         desc: "是否到相关医院或门诊检查？ Have you been to hospital or clinic today?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 10,
         type: 1,
         name: "jcjgqr",
         visible: false,
         desc: "检查结果属于以下哪种情况？ Choose your test result",
-        option: ["疑似感染 With suspected Novel coronavirus pneumonia infection" ,"确诊感染 Confirmed Novel coronavirus pneumonia infection" ,"其他 Other" ]
+        option: ["疑似感染 With suspected Novel coronavirus pneumonia infection" ,"确诊感染 Confirmed Novel coronavirus pneumonia infection" ,"其他 Other" ],
+        checked: 0,
       },{
         id: 11,
         type: 2,
         naem: "gcjg",
         visible: false,
         desc: "观察或诊疗情况 Doctor's diagnosis",
-        answer: ""
+        answer: "",
       },{
         id: 12,
         type: 2,
         naem: "jcjg",
         visible: false,
         desc: "检查结果 Diagnose result",
-        answer: ""
+        answer: "",
       },{
         id: 13,
         type: 1,
-        name: "sfjcbh",
+        name: "sfjcys",
         visible: true,
         desc: "今日是否接触过新冠肺炎疑似感染者？ Have you met suspected Novel coronavirus pneumonia patient today?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 14,
         type: 2,
         name: "jcbhrq",
         visible: false,
         desc: "接触疑似人群时间 When did you met the suspected patient today?",
-        answer: ""
+        answer: "",
       },{
         id: 15,
         type: 1,
         name: "sfjcqz",
         visible: true,
         desc: "今日是否接触过新冠肺炎感染者？ Have you met confirmed Novel coronavirus pneumonia patient today",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 16,
         type: 2,
         name: "jcqzrq",
         visible: false,
         desc: "接触确诊人群时间 When did you met the Novel coronavirus pneumonia patient today?",
-        answer: ""
+        answer: "",
       },{
         id: 17,
         type: 1,
         name: "sfyqjzgc",
         visible: false,
         desc: "今日是否被当地管理部门要求在集中隔离点医学观察？ Have you been isolated by the local authorities at centralized isolation point for medical observation today?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 18,
         type: 1,
         name: "sfcyglq",
         visible: false,
         desc: "今日是否居家隔离观察（居家非隔离状态填否）? Have you been in self-isolation at home today (select No if you are just stay at home but not isolated)?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 19,
         type: 1,
@@ -308,28 +322,32 @@ Page({
         name: "jrsfqzys",
         visible: true,
         desc: "今日是否确诊疑似新冠肺炎？ Have you been diagnosed as suspected Novel coronavirus pneumonia patient?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 21,
         type: 1,
         name: "jrdqtlqk",
         visible: true,
         desc: "你是否4月10日后从下列地区返回浙江（含经停）? Did you return to Zhejiang from the following areas after April 10th (including stopovers)？",
-        option: ["武汉 Wuhan" ,"湖北（除武汉） Hubei (non-Wuhan regions)" ,"哈尔滨市 Harbin" ,"绥芬河市 Suifenhe" ,"满洲里市 Manzhouli" ,"广州市 Guangzhou" ,"深圳市 Shenzhen" ,"揭阳市 Jieyang" ,"否 None of the above" ]
+        option: ["武汉 Wuhan" ,"湖北（除武汉） Hubei (non-Wuhan regions)" ,"哈尔滨市 Harbin" ,"绥芬河市 Suifenhe" ,"满洲里市 Manzhouli" ,"广州市 Guangzhou" ,"深圳市 Shenzhen" ,"揭阳市 Jieyang" ,"否 None of the above" ],
+        checked: 0,
       },{
         id: 22,
         type: 1,
         name: "sfhsjc",
         visible: true,
         desc: "你是否做过核酸检测？Did you screen by COVID-2019 Nucleic Acid Diagnosis Kit?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 23,
         type: 1,
         name: "sfcxzysx",
         visible: true,
         desc: "是否有任何与疫情相关的，值得注意的情况？ Do you have any situation related to the epidemic that deserves attention?",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 24,
         type: 2,
@@ -343,21 +361,24 @@ Page({
         name: "sfsqhzjkk",
         visible: true,
         desc: "是否已经申领校区所在地健康码？Have you got the health code of the city where the campus is located？",
-        option: ["是 Yes" ,"否 No" ]
+        option: ["是 Yes" ,"否 No" ],
+        checked: 0,
       },{
         id: 26,
         type: 1,
         name: "sqhzjkkys",
         visible: false,
         desc: "今日申领校区所在地健康码的颜色？What's the color of today's health code？",
-        option: ["绿码 Green code" ,"红码 Red code" ,"黄码 Yellow code" ,"橙码 Orange code" ]
+        option: ["绿码 Green code" ,"红码 Red code" ,"黄码 Yellow code" ,"橙码 Orange code" ],
+        checked: 0,
       },{
         id: 27,
         type: 1,
         name: "sfymqjczrj",
         visible: true,
         desc: "本人家庭成员(包括其他密切接触人员)是否有近14日入境或近14日拟入境的情况？Have your family members (including other close contact persons）entered Chinese Mainland over the past 14 days or plan to enter Chinese Mainland in 14 days?",
-        option: ["是 Yes，请及时向所在单位报告实际情况。please contact your college/school immediately","否 No" ]
+        option: ["是 Yes，请及时向所在单位报告实际情况。please contact your college/school immediately","否 No" ],
+        checked: 0,
       },{
         id: 28,
         type: 2,
@@ -372,7 +393,8 @@ Page({
         name: "sfyrjjh",
         visible: false,
         desc: "未来14天内是否有入境计划? Do you have plan to enter Chinese Mainland in the next 14 days?",
-        option: ["是 Yes","否 No" ]
+        option: ["是 Yes","否 No" ],
+        checked: 0,
       },{
         id: 30,
         type: 2,
@@ -416,7 +438,8 @@ Page({
         name: "rjjtfs",
         visible: false,
         desc: "入境交通方式 Mode of transport by which you enter Chinese Mainland",
-        option: ["飞机 By plane" ,"火车 By train" , "其他 Other"]
+        option: ["飞机 By plane" ,"火车 By train" , "其他 Other"],
+        checked: 0,
       },{
         id: 36,
         type: 2,
@@ -430,7 +453,8 @@ Page({
         name: "jnjtfs",
         visible: false,
         desc: "境内交通方式 Mode of transport in Chinese Mainland",
-        option: ["飞机 By plane" ,"火车 By train" ,"其他 Other"]
+        option: ["飞机 By plane" ,"火车 By train" ,"其他 Other"],
+        checked: 0,
       },{
         id: 38,
         type: 2,
@@ -447,7 +471,6 @@ Page({
       }
     ]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -457,6 +480,11 @@ Page({
     this.setData({
     'message.date': DATE
     })
+    var arr = this.data.message
+    console.log(arr.length)
+    for(let i = 0;i < arr.length;i++) {
+      console.log(arr)
+    }
   },
 
   /**
@@ -471,7 +499,30 @@ Page({
    */
   onShow: function () {
     this.setData({
-      
+      // 页面初始化
+      'questionnaire[1].visible': (this.data.questionnaire[0].checked == 0),
+      'questionnaire[9].visible': (this.data.questionnaire[6].checked == 0 || this.data.questionnaire[7].checked == 0),
+      'questionnaire[10].visible': (this.data.questionnaire[9].checked == 0),
+      'questionnaire[11].visible': (this.data.questionnaire[9].checked == 0),
+      'questionnaire[12].visible': (this.data.questionnaire[9].checked == 0),
+      'questionnaire[14].visible': (this.data.questionnaire[13].checked == 0),
+      'questionnaire[16].visible': (this.data.questionnaire[13].checked == 0),
+      'questionnaire[17].visible': (this.data.questionnaire[13].checked == 0 || this.data.questionnaire[14].checked == 0),
+      'questionnaire[18].visible': (this.data.questionnaire[13].checked == 0 || this.data.questionnaire[14].checked == 0),
+      'questionnaire[19].visible': (this.data.questionnaire[18].checked == 0),
+      'questionnaire[24].visible': (this.data.questionnaire[20].checked == 0),
+      'questionnaire[26].visible': (this.data.questionnaire[25].checked == 0),
+      'questionnaire[28].visible': (this.data.questionnaire[2].checked == 0),
+      'questionnaire[29].visible': (this.data.questionnaire[27].checked == 0),
+      'questionnaire[30].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[31].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[32].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[33].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[34].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[35].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[36].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[37].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[38].visible': (this.data.questionnaire[29].checked == 0),
     })
   },
 
