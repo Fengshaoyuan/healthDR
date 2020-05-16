@@ -1,0 +1,2 @@
+<!--miniprogram/pages/homepage/homepage.wxml-->
+<image src="../../images/tempdemo01.png" mode="widthFix" style="width:100%"/>

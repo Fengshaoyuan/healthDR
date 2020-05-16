@@ -1,0 +1,6 @@
+<!--miniprogram/pages/login.wxml-->
+	<view class="login-from">
+		<view class='titleText'>申请获取以下权限</view>
+		<view class='contentText'>获得你的公开信息(昵称,头像,手机等)</view>
+		<button class='weui-btn' type='primary' open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>授权登录</button>
+	</view>

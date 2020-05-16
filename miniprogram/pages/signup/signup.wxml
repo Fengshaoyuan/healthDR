@@ -1,0 +1,72 @@
+<!--miniprogram/pages/signin/signin.wxml-->
+
+<view class="userinfo">
+	<button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar" style="background-image: url({{userInfo.avatarUrl}})" size="default"></button>
+	<view class="userinfo-nickname-wrapper">
+		<button class="userinfo-nickname" bindtap="onGetOpenid">{{userInfo.nickName}}</button>
+		<!--<view class="nickname">{{userInfo.nickName}}</view>-->
+	</view>
+
+</view>
+
+<view class="weui-cells__title">个人信息</view>
+<view class="weui-cells weui-cells_after-title">
+	<view class="weui-cell weui-cell_active {{idErr ? 'weui-cell_warn' : ''}}">
+		<view class="weui-cell__hd">
+			<view class="weui-label">学/工号</view>
+		</view>
+		<view class="weui-cell__bd">
+			<input bindblur="bindZjuIdBlur" class="weui-input" placeholder="3170000000" type="number"/>
+		</view>
+	</view>
+
+	<view class="weui-cell weui-cell_active {{nameErr ? 'weui-cell_warn' : ''}}">
+		<view class="weui-cell__hd">
+			<view class="weui-label">姓名</view>
+		</view>
+		<view class="weui-cell__bd">
+			<input bindblur="bindNameBlur" class="weui-input" placeholder="张三" />
+		</view>
+	</view>
+
+	<view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+		<view class="weui-cell__hd">
+			<view class="weui-label">学院</view>
+		</view>
+		<view class="weui-cell__bd">
+			<picker bindchange="bindSchoolChange" value="{{schoolIndex}}" range="{{schools}}">
+				<view class="weui-select weui-select_in-select-after">{{schools[schoolIndex]}}</view>
+			</picker>
+		</view>
+	</view>
+
+	<view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+		<view class="weui-cell__hd">
+			<view class="weui-label">专业</view>
+		</view>
+		<view class="weui-cell__bd">
+			<picker bindchange="bindMajorChange" value="{{majorIndex}}" range="{{majors[schoolIndex]}}">
+				<view class="weui-select weui-select_in-select-after">{{majors[schoolIndex][majorIndex]}}</view>
+			</picker>
+		</view>
+	</view>
+
+	<view class="weui-cell weui-cell_active {{classErr ? 'weui-cell_warn' : ''}}">
+		<view class="weui-cell__hd">
+			<view class="weui-label">班级</view>
+		</view>
+		<view class="weui-cell__bd">
+			<input bindblur="bindClassBlur" class="weui-input" placeholder="1701" type="number"/>
+		</view>
+	</view>
+</view>
+
+<view class="weui-cells__title"></view>
+<view class="weui-form__tips-area">
+	<view class="m_weui-form__tips">
+		{{ErrMessage}}
+	</view>
+<view class="weui-form__opr-area">
+			<a class="weui-btn weui-btn_primary" bindtap="btnclick">确定</a>
+</view>
+</view>

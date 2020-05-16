@@ -1,0 +1,2 @@
+<!--miniprogram/pages/vi/vi.wxml-->
+<image src="../../images/tempdemo02.png" mode="widthFix" style="width:100%"/>
