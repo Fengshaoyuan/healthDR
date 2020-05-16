@@ -1,0 +1,50 @@
+<!-- 表单组件 -->
+<form class="questionare">
+  <!-- 基础信息 -->
+  <view class="baseMsg">
+    <view class="desc">今日日期 Date</view>
+    <text>{{message.date}}</text>
+  </view>
+  <view class="baseMsg">
+    <view class="desc">姓名 Name</view>
+    <text>{{message.realName}}</text>
+  </view>
+  <view class="baseMsg">
+    <view class="desc">学工号 Student/Staff ID No.</view>
+    <text>{{message.studentID}}</text>
+  </view>
+
+  <!-- 问卷主体 -->
+  <view class="questionContainer">
+    <!-- 问题列表渲染 -->
+    <block wx:for="{{questionnaire}}" wx:key="id" wx:for-item="question">
+      <!-- 使用hidden隐藏不可见的问题，不会降低页面的渲染性能 -->
+      <view class="questionMsg" hidden="{{!question.visible}}">
+        <view class="desc">{{question.desc}}</view>
+        <!-- 问题选项列表渲染 -->
+        <view class="option" wx:if="{{question.type==1}}">
+          <radio-group name="{{question.name}}" class="radio-group" bindchange="radioChange" >
+            <lable class="optionItem" wx:for="{{question.option}}" wx:key="id" wx:for-item="option"> 
+              <!-- 使用value传值（问题的name和选项的id） -->
+              <radio class="radio" value="{{[question.name,index]}}" />
+              <text class="value">{{option}}</text>
+            </lable>
+          </radio-group>
+        </view>
+
+        <!-- 不同类型的问题采用不同的渲染方式 -->
+        <view class="inputs" wx:elif="{{question.type==2}}">
+          <textarea class="answer" placeholder="{{question.placeholder ? question.placeholder : '在此输入信息'}}"/>
+        </view>
+
+        <view wx:elif="{{question.type==3}}" bindtap="_getLocatin">
+          <text class="location">{{message.location ? message.location : "点击获取地理位置(Click to get your location)"}}</text>
+        </view>
+        
+      </view>
+    </block>
+  </view>
+
+</form>
+
+<button class="confirm" type="submit" disabled="{{!canSubmit}}">提交信息 Submit information</button> 

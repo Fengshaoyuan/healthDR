@@ -1,0 +1,47 @@
+.cardItem {
+  height: 200rpx;
+  border-bottom: 10rpx;
+  display: flex;
+  border-radius: 20rpx;
+  margin: 80rpx 40rpx;
+  box-shadow: 4rpx 4rpx 10rpx 4rpx gray;
+}
+.card_hover_btn {
+  transform: scale(0.98, 0.98);
+}
+
+.cardItem .icon {
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx;
+  margin-right: 0;
+  border-radius: 12rpx;
+}
+
+.cardItem .icon image {
+  width: 100%;
+  height: 100%;
+}
+
+.cardItem .desc {
+  /* background-color: cyan; */
+  flex: 1;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardItem .desc text {
+  margin-top: 20rpx;
+  margin-left: 35rpx;
+  display: block; 
+}
+
+.cardItem .desc .cardTitle {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.cardItem .desc .cardDesc {
+  color: gray;
+}

@@ -1,0 +1,15 @@
+<view class="cardContainer">
+  <!-- 循环渲染个人中心卡片，调用自定义卡片组件 -->
+  <block wx:for="{{cardItems}}" wx:key="name">
+    <view id="{{item.name}}" class="cardItem" bindtap="_handlerTap" hover-class="card_hover_btn" hover-start-time="20" hover-stay-time="100">
+      <!-- 简单的数据绑定，重要的是wxss样式 -->
+      <view class="icon">
+        <image src="{{item.img}}" mode="aspecttoFill"/>
+      </view>
+      <view class="desc">
+        <text class="cardTitle">{{item.title}}</text>
+        <text class="cardDesc">{{item.description}}</text>
+      </view>
+    </view>    
+  </block>
+</view>

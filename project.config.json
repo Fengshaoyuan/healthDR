@@ -45,13 +45,33 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
+					"id": 0,
+					"name": "健康打卡",
+					"pathName": "pages/DailyReport/DailyReport",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "个人中心",
+					"pathName": "pages/PersonalCenter/PersonalCenter",
+					"query": "",
+					"scene": null
+				},
+				{
 					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"name": "二维码",
+					"pathName": "pages/QRcode/QRcode",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

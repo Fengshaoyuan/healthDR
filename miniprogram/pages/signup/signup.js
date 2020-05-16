@@ -225,7 +225,7 @@ Page({
     
     // 进入主界面
     wx.switchTab({
-      url: '/pages/QR/QR'
+      url: '/pages/PersonalCenter/PersonalCenter'
     })
   }
 })

@@ -1,24 +1,25 @@
 {
   "pages": [
-    
-    "pages/QR/QR",
     "pages/permission/permission",
     "pages/signup/signup",
     "pages/circu/circu",
     "pages/news/news",
-    "pages/questionnaire/questionnaire",
-    "pages/vi/vi"
+    "pages/vi/vi",
+    "pages/DailyReport/DailyReport",
+    "pages/PersonalCenter/PersonalCenter",
+    "pages/QRcode/QRcode"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#eeeeee",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#4D4D4D",
     "navigationBarTitleText": "EMSS 疫情防控系统",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
-    "color": "#a9b7b7",
-    "selectedColor": "#11cd6e",
+    "color": "#707070",
+    "selectedColor": "#1296db",
     "backgroundColor": "ffffff",
     "list": [
       {
@@ -26,30 +27,26 @@
         "iconPath": "images/vi.png",
         "pagePath": "pages/vi/vi",
         "text": "疫情信息"
-      },
-      {
-        "selectedIconPath": "images/form.png",
-        "iconPath": "images/form.png",
-        "pagePath": "pages/questionnaire/questionnaire",
-        "text": "健康打卡"
-      },
-      {
-        "selectedIconPath": "images/QR.png",
-        "iconPath": "images/QR.png",
-        "pagePath": "pages/QR/QR",
-        "text": "健康码"
-      },
-      {
+      },{
+        "pagePath": "pages/DailyReport/DailyReport",
+        "text": "健康打卡",
+        "iconPath": "images/tabbar/daka_nor.png",
+        "selectedIconPath": "images/tabbar/daka_sel.png"
+      },{
         "selectedIconPath": "images/news.png",
         "iconPath": "images/news.png",
         "pagePath": "pages/news/news",
         "text": "疫情新闻"
-      },
-      {
+      },{
         "selectedIconPath": "images/map.png",
         "iconPath": "images/map.png",
         "pagePath": "pages/circu/circu",
         "text": "周边服务"
+      },{
+        "pagePath": "pages/PersonalCenter/PersonalCenter",
+        "text": "个人中心",
+        "iconPath": "images/tabbar/center_nor.png",
+        "selectedIconPath": "images/tabbar/center_sel.png"
       }
     ]
   },
