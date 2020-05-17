@@ -8,10 +8,10 @@ Page({
    */
   data: {
     time: "",
-    realname: "张三",
-    studentID: "3170100001",
+    realname: "",
+    studentID: "",
     qr_url:"",
-    college: "地球科学学院",
+    college: "",
     healthColor: "00a650"
   },
 
