@@ -3,17 +3,19 @@ Page({
 
   /**
    * 页面的初始数据
-   * 默认提醒时间为10:00
+   * 默认提醒时间为11:00
    */
   data: {
-    times:'10:00',
+    times:null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      times:'10:00',
+    })
   },
 
   /**
