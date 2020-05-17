@@ -38,7 +38,7 @@
         </view>
 
         <view wx:elif="{{question.type==3}}" bindtap="_getLocatin">
-          <text class="location">{{message.location ? message.location : "点击获取地理位置(Click to get your location)"}}</text>
+          <text name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" class="location">{{message.location ? message.location : "点击获取地理位置(Click to get your location)"}}</text>
         </view>
         
         <view wx:elif="{{question.type==4}}">
