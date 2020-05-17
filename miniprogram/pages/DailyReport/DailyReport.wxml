@@ -26,7 +26,7 @@
           <radio-group name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" class="radio-group" bindchange="radioChange" >
             <lable class="optionItem" wx:for="{{question.option}}" wx:key="id" wx:for-item="option"> 
               <!-- 使用value传值（问题的name和选项的id） -->
-              <radio class="radio" value="{{index}}" checked="{{question.checked == index}}"/>
+              <radio class="radio" value="{{index}}" checked="{{question.choice == index}}"/>
               <text class="value">{{option}}</text>
             </lable>
           </radio-group>
@@ -34,7 +34,7 @@
 
         <!-- 不同类型的问题采用不同的渲染方式 -->
         <view class="inputs" wx:elif="{{question.type==2}}">
-          <textarea class="answer" placeholder="{{question.placeholder ? question.placeholder : '在此输入信息'}}"/>
+          <input name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" class="answer" placeholder="{{question.placeholder ? question.placeholder : '在此输入信息'}}" bindinput="inputChange"/>
         </view>
 
         <view wx:elif="{{question.type==3}}" bindtap="_getLocatin">
@@ -42,7 +42,7 @@
         </view>
         
         <view wx:elif="{{question.type==4}}">
-          <picker name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="bindDateChange">
+          <picker name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="dateChange">
             <view class="picker">
               当前选择: {{question.date}}
             </view>

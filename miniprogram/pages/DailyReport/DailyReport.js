@@ -3,26 +3,24 @@ var util = require('../../utils/util.js');
 
 Page({
   radioChange: function (e) {
-    // 将传入的value值转换为字符串数组
-    // let arr = e.detail.value.split(',')
-    // let str1 = "message." + name
-    // let str2 = "questionnaire[" + arr[1] + "].checked"
     let name = e.currentTarget.id
     let index = e.currentTarget.dataset.index
     let str1 = "message." + name
-    let str2 = "questionnaire[" + index + "].checked"
+    let str2 = "questionnaire[" + index + "].choice"
 
-    console.log(str1,str2)
+    if(name == "brcn") {
+      this.setData({
+        canSubmit: true,
+      })
+      return
+    }
+
+    // console.log(this.data.message)
     this.setData({
       [str1]: e.detail.value, 
       [str2]: e.detail.value,
     })
 
-    if(this.data.message.location != "" && this.data.questionnaire[39].checked == 0) {
-      this.setData({
-        canSubmit: true,
-      })
-    }
     // 为每次选项更改事件判定，是否选中了会产生二级问题的问题，并更新相应问题的hidden属性，此处语法有待改进
     // 实测直接合并设置this.setData（{})会导致莫名BUG，应该是每次触发函数都判断了的问题
     if(name == "sfzx") {
@@ -144,16 +142,55 @@ Page({
       }
     })
   },
-  formSubmit(e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
-  },
-  bindDateChange: function(e) {
+  dateChange: function(e) {
     console.log('picker发送选择改变，携带值为', e)
     let str2 = "questionnaire[" + e.currentTarget.dataset.index + "].date"
     this.setData({
       [str2]: e.detail.value
     })
   },
+  inputChange: function(e) {
+    let name = e.currentTarget.id
+    let index = e.currentTarget.dataset.index
+    let str1 = "message." + name
+    let str2 = "questionnaire[" + index + "].answer"
+    if(e.detail.value != "") {
+      this.setData({
+      [str1]: e.detail.value, 
+      [str2]: e.detail.value,
+    })
+    }
+  },
+  formSubmit(e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    //把数据给云数据库
+    const db = wx.cloud.database({})
+    const cont = db.collection('HealthData')
+    console.log(this.data.message)
+    let that = this
+    cont.add({
+      data: that.data.message,
+      success: function (res) {
+        console.log(res._id)
+        wx.showModal({
+          title: '成功',
+          content: '今日打卡信息已上报',
+          showCancel: false,
+        })
+        that.setData({
+          canSubmit: false
+        })
+      },
+      fail: function(res) {
+        wx.showModal({
+          title: '失败',
+          content: '上报失败',
+          showCancel: false
+        })
+      }
+    });
+  },
+  
   /**
    * 页面的初始数据
    */
@@ -164,13 +201,12 @@ Page({
       date: "",
       realName: "张三",
       studentID: "3170100001",
-      location: "",
-      sfzx:0,
+      location: null,
+      sfzx:1,
       sfcxtz:1,
-      sfzgn: "",
-      szdd: "",
-      sffrqjwdg: 0,
-      sfqtyyqjwdg: "",
+      sfzgn: 0,
+      sffrqjwdg: 1,
+      sfqtyyqjwdg: 1,
       tw: 1,
       sfyyjc: 1,
       sfjcys: 1,
@@ -191,7 +227,7 @@ Page({
         visible: true,
         desc: "今日是否在校？ Are you on campus today?",
         option: ["是 Yes" ,"否 No"],
-        checked: 0,
+        choice: 1,
       },{
         id: 1,
         type: 2,
@@ -199,7 +235,6 @@ Page({
         visible: false,
         desc: "返校原因 Reason for returning to school",
         answer: "",
-        checked: 0,
       },{
         id: 2,
         type: 1,
@@ -207,7 +242,7 @@ Page({
         visible: true,
         desc: "所在地点 Your Location",
         option: ["境内 in Chinese Mainland","境外 outside Chinese Mainland"],
-        checked: 0,
+        choice: 0,
       },{
         id: 3,
         type: 3,
@@ -222,7 +257,7 @@ Page({
         visible: false,
         desc: "当前地点与上次不在同一城市，原因如下 Current location is different from last time，why",
         option: ["探亲" ,"旅游" ,"其他" ],
-        checked: 0,
+        choice: 0,
       },{
         id: 5,
         type: 1,
@@ -230,7 +265,7 @@ Page({
         visible: true,
         desc: "今日是否因发热请假未到岗（教职工）或未返校（学生）？ Are you on leave due to fever?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 6,
         type: 1,
@@ -238,7 +273,7 @@ Page({
         visible: true,
         desc: "今日是否因发热外的其他原因请假未到岗（教职工）或未返校（学生）？ Are you on leave due to other symptoms except fever?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 7,
         type: 1,
@@ -246,7 +281,7 @@ Page({
         visible: true,
         desc: "今日是否有发热症状（高于37.2 ℃）？ Do you have a fever(above 37.2℃) today?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 8,
         type: 1,
@@ -254,7 +289,7 @@ Page({
         visible: true,
         desc: "今日是否有咳嗽、呼吸道不畅、腹泻等其他症状？ Do you have cough, poor respiratory tract, diarrhea and other symptoms today?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 9,
         type: 1,
@@ -262,7 +297,7 @@ Page({
         visible: false,
         desc: "是否到相关医院或门诊检查？ Have you been to hospital or clinic today?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 10,
         type: 1,
@@ -270,7 +305,7 @@ Page({
         visible: false,
         desc: "检查结果属于以下哪种情况？ Choose your test result",
         option: ["疑似感染 With suspected Novel coronavirus pneumonia infection" ,"确诊感染 Confirmed Novel coronavirus pneumonia infection" ,"其他 Other" ],
-        checked: 0,
+        choice: 3,
       },{
         id: 11,
         type: 2,
@@ -292,7 +327,7 @@ Page({
         visible: true,
         desc: "今日是否接触过新冠肺炎疑似感染者？ Have you met suspected Novel coronavirus pneumonia patient today?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 14,
         type: 4,
@@ -307,7 +342,7 @@ Page({
         visible: true,
         desc: "今日是否接触过新冠肺炎感染者？ Have you met confirmed Novel coronavirus pneumonia patient today",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 16,
         type: 4,
@@ -322,7 +357,7 @@ Page({
         visible: false,
         desc: "今日是否被当地管理部门要求在集中隔离点医学观察？ Have you been isolated by the local authorities at centralized isolation point for medical observation today?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 18,
         type: 1,
@@ -330,7 +365,7 @@ Page({
         visible: false,
         desc: "今日是否居家隔离观察（居家非隔离状态填否）? Have you been in self-isolation at home today (select No if you are just stay at home but not isolated)?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 19,
         type: 4,
@@ -345,7 +380,7 @@ Page({
         visible: true,
         desc: "今日是否确诊疑似新冠肺炎？ Have you been diagnosed as suspected Novel coronavirus pneumonia patient?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 21,
         type: 1,
@@ -353,7 +388,7 @@ Page({
         visible: true,
         desc: "你是否4月10日后从下列地区返回浙江（含经停）? Did you return to Zhejiang from the following areas after April 10th (including stopovers)？",
         option: ["武汉 Wuhan" ,"湖北（除武汉） Hubei (non-Wuhan regions)" ,"哈尔滨市 Harbin" ,"绥芬河市 Suifenhe" ,"满洲里市 Manzhouli" ,"广州市 Guangzhou" ,"深圳市 Shenzhen" ,"揭阳市 Jieyang" ,"否 None of the above" ],
-        checked: 0,
+        choice: 8,
       },{
         id: 22,
         type: 1,
@@ -361,7 +396,7 @@ Page({
         visible: true,
         desc: "你是否做过核酸检测？Did you screen by COVID-2019 Nucleic Acid Diagnosis Kit?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 23,
         type: 1,
@@ -369,7 +404,7 @@ Page({
         visible: true,
         desc: "是否有任何与疫情相关的，值得注意的情况？ Do you have any situation related to the epidemic that deserves attention?",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 24,
         type: 2,
@@ -384,7 +419,7 @@ Page({
         visible: true,
         desc: "是否已经申领校区所在地健康码？Have you got the health code of the city where the campus is located？",
         option: ["是 Yes" ,"否 No" ],
-        checked: 0,
+        choice: 0,
       },{
         id: 26,
         type: 1,
@@ -392,7 +427,7 @@ Page({
         visible: false,
         desc: "今日申领校区所在地健康码的颜色？What's the color of today's health code？",
         option: ["绿码 Green code" ,"红码 Red code" ,"黄码 Yellow code" ,"橙码 Orange code" ],
-        checked: 0,
+        choice: 0,
       },{
         id: 27,
         type: 1,
@@ -400,7 +435,7 @@ Page({
         visible: true,
         desc: "本人家庭成员(包括其他密切接触人员)是否有近14日入境或近14日拟入境的情况？Have your family members (including other close contact persons）entered Chinese Mainland over the past 14 days or plan to enter Chinese Mainland in 14 days?",
         option: ["是 Yes，请及时向所在单位报告实际情况。please contact your college/school immediately","否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 28,
         type: 2,
@@ -416,7 +451,7 @@ Page({
         visible: false,
         desc: "未来14天内是否有入境计划? Do you have plan to enter Chinese Mainland in the next 14 days?",
         option: ["是 Yes","否 No" ],
-        checked: 0,
+        choice: 1,
       },{
         id: 30,
         type: 2,
@@ -461,7 +496,7 @@ Page({
         visible: false,
         desc: "入境交通方式 Mode of transport by which you enter Chinese Mainland",
         option: ["飞机 By plane" ,"火车 By train" , "其他 Other"],
-        checked: 0,
+        choice: 0,
       },{
         id: 36,
         type: 2,
@@ -476,7 +511,7 @@ Page({
         visible: false,
         desc: "境内交通方式 Mode of transport in Chinese Mainland",
         option: ["飞机 By plane" ,"火车 By train" ,"其他 Other"],
-        checked: 0,
+        choice: 0,
       },{
         id: 38,
         type: 2,
@@ -488,9 +523,10 @@ Page({
       },{
         id: 39,
         type: 1,
+        name: "brcn",
         visible: true,
         option: ["本人承诺：\n上述信息真实准确。如有变化，及时更新相关信息并报告所在单位。\n本人已知晓并将遵守政府和学校相关规定，配合做好疫情防控工作。\nI agree:\nThe above information is true and accurate. In case of changes, I will keep my information updated and report in a timely manner.\nI have understood and will abide by the relevant government and University regulations to facilitate the prevention and control of COVID-19 epidemic." ],
-        checked: 1,
+        choice: 1,
       }
     ]
   },
@@ -518,29 +554,29 @@ Page({
   onShow: function () {
     this.setData({
       // 页面初始化
-      'questionnaire[1].visible': (this.data.questionnaire[0].checked == 0),
-      'questionnaire[9].visible': (this.data.questionnaire[6].checked == 0 || this.data.questionnaire[7].checked == 0),
-      'questionnaire[10].visible': (this.data.questionnaire[9].checked == 0),
-      'questionnaire[11].visible': (this.data.questionnaire[9].checked == 0),
-      'questionnaire[12].visible': (this.data.questionnaire[9].checked == 0),
-      'questionnaire[14].visible': (this.data.questionnaire[13].checked == 0),
-      'questionnaire[16].visible': (this.data.questionnaire[13].checked == 0),
-      'questionnaire[17].visible': (this.data.questionnaire[13].checked == 0 || this.data.questionnaire[14].checked == 0),
-      'questionnaire[18].visible': (this.data.questionnaire[13].checked == 0 || this.data.questionnaire[14].checked == 0),
-      'questionnaire[19].visible': (this.data.questionnaire[18].checked == 0),
-      'questionnaire[24].visible': (this.data.questionnaire[20].checked == 0),
-      'questionnaire[26].visible': (this.data.questionnaire[25].checked == 0),
-      'questionnaire[28].visible': (this.data.questionnaire[2].checked == 0),
-      'questionnaire[29].visible': (this.data.questionnaire[27].checked == 0),
-      'questionnaire[30].visible': (this.data.questionnaire[29].checked == 0),
-      'questionnaire[31].visible': (this.data.questionnaire[29].checked == 0),
-      'questionnaire[32].visible': (this.data.questionnaire[29].checked == 0),
-      'questionnaire[33].visible': (this.data.questionnaire[29].checked == 0),
-      'questionnaire[34].visible': (this.data.questionnaire[29].checked == 0),
-      'questionnaire[35].visible': (this.data.questionnaire[29].checked == 0),
-      'questionnaire[36].visible': (this.data.questionnaire[29].checked == 0),
-      'questionnaire[37].visible': (this.data.questionnaire[29].checked == 0),
-      'questionnaire[38].visible': (this.data.questionnaire[29].checked == 0),
+      'questionnaire[1].visible': (this.data.questionnaire[0].choice == 0),
+      'questionnaire[9].visible': (this.data.questionnaire[6].choice == 0 || this.data.questionnaire[7].choice == 0),
+      'questionnaire[10].visible': (this.data.questionnaire[9].choice == 0),
+      'questionnaire[11].visible': (this.data.questionnaire[9].choice == 0),
+      'questionnaire[12].visible': (this.data.questionnaire[9].choice == 0),
+      'questionnaire[14].visible': (this.data.questionnaire[13].choice == 0),
+      'questionnaire[16].visible': (this.data.questionnaire[13].choice == 0),
+      'questionnaire[17].visible': (this.data.questionnaire[13].choice == 0 || this.data.questionnaire[14].choice == 0),
+      'questionnaire[18].visible': (this.data.questionnaire[13].choice == 0 || this.data.questionnaire[14].choice == 0),
+      'questionnaire[19].visible': (this.data.questionnaire[18].choice == 0),
+      'questionnaire[24].visible': (this.data.questionnaire[20].choice == 0),
+      'questionnaire[26].visible': (this.data.questionnaire[25].choice == 0),
+      'questionnaire[28].visible': (this.data.questionnaire[2].choice == 1),
+      'questionnaire[29].visible': (this.data.questionnaire[27].choice == 0),
+      'questionnaire[30].visible': (this.data.questionnaire[29].choice == 0),
+      'questionnaire[31].visible': (this.data.questionnaire[29].choice == 0),
+      'questionnaire[32].visible': (this.data.questionnaire[29].choice == 0),
+      'questionnaire[33].visible': (this.data.questionnaire[29].choice == 0),
+      'questionnaire[34].visible': (this.data.questionnaire[29].choice == 0),
+      'questionnaire[35].visible': (this.data.questionnaire[29].choice == 0),
+      'questionnaire[36].visible': (this.data.questionnaire[29].choice == 0),
+      'questionnaire[37].visible': (this.data.questionnaire[29].choice == 0),
+      'questionnaire[38].visible': (this.data.questionnaire[29].choice == 0),
     })
   },
 
