@@ -1,0 +1,18 @@
+<!--miniprogram/pages/SetAlarm/SetAlarm.wxml-->
+<!-- 创建时间滚动条，确认按钮与文字说明 -->
+<view class="section">  
+<!-- 设置时间滚动条的可修改范围为6:00-11:59 -->
+  <picker mode="time" value="{{time}}" start="06:00" end="11:59" bindchange="bindTimeChange">  
+    <view class="picker">  
+     提醒时间 : {{times}}
+    </view>  
+  </picker>  
+</view> 
+<view class="btn">
+  <button bindtap="permission">确定设置</button>
+</view>
+<text class="comments"><text class="tip">*</text>当前仅限设置次日提醒时间为6:00-11:59</text>
+
+
+
+

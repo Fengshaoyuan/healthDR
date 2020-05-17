@@ -1,0 +1,22 @@
+/* pages/SetAlarm/SetAlarm.wxss */
+.section{
+  background: #D7DBDD;
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 5rpx;
+}
+
+.btn{
+  background: #eeeeee;
+  margin: 20rpx;
+}
+
+.comments{
+  color: black;
+  margin: 20rpx;
+  font-size: 32rpx;
+}
+
+.tip{
+  color: red;
+}

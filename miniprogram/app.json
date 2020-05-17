@@ -7,7 +7,8 @@
     "pages/vi/vi",
     "pages/DailyReport/DailyReport",
     "pages/PersonalCenter/PersonalCenter",
-    "pages/QRcode/QRcode"
+    "pages/QRcode/QRcode",
+    "pages/SetAlarm/SetAlarm"
   ],
   "window": {
     "backgroundColor": "#eeeeee",
@@ -27,22 +28,26 @@
         "iconPath": "images/vi.png",
         "pagePath": "pages/vi/vi",
         "text": "疫情信息"
-      },{
+      },
+      {
         "pagePath": "pages/DailyReport/DailyReport",
         "text": "健康打卡",
         "iconPath": "images/tabbar/daka_nor.png",
         "selectedIconPath": "images/tabbar/daka_sel.png"
-      },{
+      },
+      {
         "selectedIconPath": "images/news.png",
         "iconPath": "images/news.png",
         "pagePath": "pages/news/news",
         "text": "疫情新闻"
-      },{
+      },
+      {
         "selectedIconPath": "images/map.png",
         "iconPath": "images/map.png",
         "pagePath": "pages/circu/circu",
         "text": "周边服务"
-      },{
+      },
+      {
         "pagePath": "pages/PersonalCenter/PersonalCenter",
         "text": "个人中心",
         "iconPath": "images/tabbar/center_nor.png",
@@ -50,13 +55,13 @@
       }
     ]
   },
-   "networkTimeout": {
+  "networkTimeout": {
     "request": 5000,
     "downloadFile": 5000
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序定位" 
+      "desc": "你的位置信息将用于小程序定位"
     }
   },
   "sitemapLocation": "sitemap.json"

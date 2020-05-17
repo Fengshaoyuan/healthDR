@@ -1,40 +1,12 @@
-// pages/PersonalCenter/PersonalCenter.js
+// miniprogram/pages/SetAlarm/SetAlarm.js
 Page({
-  _handlerTap: function(e) {
-    if(e.currentTarget.id == "QRcode") {
-      wx.navigateTo({
-        url: '/pages/QRcode/QRcode'
-      })   
-    }
-    else if(e.currentTarget.id == "alarm"){
-      wx.navigateTo({
-        url: '/pages/SetAlarm/SetAlarm'
-      })
-    }
-  },
+
   /**
    * 页面的初始数据
+   * 默认提醒时间为10:00
    */
   data: {
-    cardItems: [
-      {
-        name: "message",
-        title: "个人信息",
-        img: "/images/personalMsg.png",
-        description: "修改个人信息"
-      },{
-        name: "QRcode",
-        title: "我的健康码",
-        img: "/images/QRcode.png",
-        description: "浙大家园 健康通行"
-      },{
-        name: "alarm",
-        title: "设置打卡提醒",
-        img: "/images/alarm.png",
-        description: "不错过每一次打卡"
-      }
-
-    ]
+    times:'10:00',
   },
 
   /**
@@ -91,5 +63,24 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  bindTimeChange:function(e){
+    console.log(e.detail.value)
+    this.setData({
+      times: e.detail.value
+    })
+  },
+
+  /*获取用户下发权限*/
+  permission(){
+    wx.requestSubscribeMessage({
+      tmplIds: ['NkYsMf6eWw_lsj4HYskphmRCL_73vsK9lQSZvUI-qU0'],
+      success(res) {
+        console.log('已授权接收订阅消息')
+      },
+      complete(res) {
+        console.log(res)
+      }
+    })
+  },
 })
