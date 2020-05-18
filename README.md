@@ -1,73 +1,60 @@
 # EMSS疫情防控系统
 
-## 小程序二维码生成v0.5.1（对应getcode云函数）
-2020/05/17：小程序增加我的健康码生成小程序接口
+# 健康打卡子系统
 
-```js
-// 云函数入口函数
+## 健康打卡 v1.0
 
-exports.main = async (event, context) => {
-  const full_path = event.page + '?' + event.scene;
-  const qr_name_hash =Date.now();
-  // const qr_name_hash = crypto.createHash('md5').update(full_path).digest('hex');
-  const temp_id = bucketPrefix + qr_name_hash+Date.now() + '.jpg';
-  // return {
-  //   full_path,
-  //   qr_name_hash,
-  //   temp_id
-  // }
+目前已基本完成开发，实现的功能及演示如下：
 
-  try {
-    // 先尝试获取文件，存在就直接返回临时路径
-    let getURLReault = await cloud.getTempFileURL({
-      fileList: [temp_id]
-    });
-    // return getURLReault;
-    let fileObj = getURLReault.fileList[0];
-    if (fileObj.tempFileURL != '') {
-      fileObj.fromCache = true;
-      return fileObj;
-    }
+### 用户登录（由第一小组实现）
 
-    // 生成小程序码
-    const wxacodeResult = await cloud.openapi.wxacode.get({
-      path: event.page,
-      // width: 430
-      lineColor: event.lineColor,
-      
-    })
-   
-    // return wxacodeResult;
-    if (wxacodeResult.errCode != 0) {
-      // 生成二维码失败，返回错误信息
-      return wxacodeResult;
-    }
+![YfzKns.png](https://s1.ax1x.com/2020/05/18/YfzKns.png) ![YfzMBn.png](https://s1.ax1x.com/2020/05/18/YfzMBn.png)
 
-    // 上传到云存储
-    const uploadResult = await cloud.uploadFile({
-      cloudPath: 'code/' + qr_name_hash + '.jpg',
-      fileContent: wxacodeResult.buffer,
-    });
-    // return uploadResult;
-    if (!uploadResult.fileID) {
-      //上传失败，返回错误信息
-      return uploadResult;
-    }
+### 每日打卡
 
-    // 获取图片临时路径
-    getURLReault = await cloud.getTempFileURL({
-      fileList: [uploadResult.fileID]
-    });
-    fileObj = getURLReault.fileList[0];
-    fileObj.fromCache = false;
+![YfzDN6.png](https://s1.ax1x.com/2020/05/18/YfzDN6.png) ![Yfz63D.png](https://s1.ax1x.com/2020/05/18/Yfz63D.png)
 
-    // 上传成功，获取文件临时url，返回临时路径的查询结果
-    return fileObj;
+###　个人中心
 
-  } catch (err) {
-    return err
-  }
-  ```
+![Yfzcge.png](https://s1.ax1x.com/2020/05/18/Yfzcge.png)
+
+###　健康码
+
+![YfzWDA.png](https://s1.ax1x.com/2020/05/18/YfzWDA.png)　![YfzTC8.png](https://s1.ax1x.com/2020/05/18/YfzTC8.png)
+
+### 设置打卡提醒
+
+![YfzTC8.png](https://s1.ax1x.com/2020/05/18/YfzTC8.png)
+
+## 健康打卡 v0.4
+
+目前已结合云开发
+
+- 大幅完善了打卡功能
+  - 现在可以初始化默认选项了
+  - 数据绑定进一步完善
+  - 可以上传打卡信息到云数据库了
+- 健康码功能完善
+  - 自动更新健康码颜色
+- 打卡提醒功能完善
+  - 可以设置打卡提醒时间了
+  - 到时将推送消息至小程序
+
+## 健康打卡 v0.3
+
+- 基本完成了每日打卡功能
+ - 目前实现了二级问题的自动隐藏和显示
+ - 更新了.js中的data数据组织方式
+ - 删除questionItem组件，合并到pages中
+ - 获取地理位置使用的api为`http://api.map.baidu.com`暂时还无法在真机上运行，因为此接口不是https，需在自己服务器上配置请求转发，请在编译器中设置`详情-本地设置-不校验合法域名` 
+
+## 健康打卡 v0.2
+
+目前完成的基础功能包括每日打卡、个人中心、健康码(暂时未启用云开发)
+- 二维码调用的api为`http://qr.liantu.com/api.php?text=`
+
+# 基础数据子系统
+
 ## 基础数据v0.2.0
 
 2020/05/10：小程序登陆界面 (v1.0) 已经全部完成
@@ -134,9 +121,6 @@ wx.cloud.callFunction({
           .catch(console.error)
     ```
 
-    
-
-
 ## 基础数据v0.1.0
 - 建立了5个主要的tabBar，请各小组基于5个tabBar界面进行开发：
   - 可视化：疫情信息 / vi
@@ -152,44 +136,6 @@ wx.cloud.callFunction({
   - 用户信息上传待完善
 - 完善了登陆逻辑
 
-# 健康打卡子系统
+# 部署方法
 
-## 健康打卡 v0.4
-
-目前已结合云开发
-
-- 大幅完善了打卡功能
-  - 现在可以初始化默认选项了
-  - 数据绑定进一步完善
-  - 可以上传打卡信息到云数据库了
-- 健康码功能完善
-  - 自动更新健康码颜色
-- 打卡提醒功能完善
-  - 可以设置打卡提醒时间了
-  - 到时将推送消息至小程序
-
-## 健康打卡 v0.3
-
-- 基本完成了每日打卡功能
- - 目前实现了二级问题的自动隐藏和显示
- - 更新了.js中的data数据组织方式
- - 删除questionItem组件，合并到pages中
- - 获取地理位置使用的api为`http://api.map.baidu.com`暂时还无法在真机上运行，因为此接口不是https，需在自己服务器上配置请求转发，请在编译器中设置`详情-本地设置-不校验合法域名` 
-
-## 健康打卡 v0.2
-
-目前完成的基础功能包括每日打卡、个人中心、健康码(暂时未启用云开发)
- 
-### 每日打卡
-
-![YEMMPP.png](https://s1.ax1x.com/2020/05/06/YEMMPP.png)![YEMQ8f.png](https://s1.ax1x.com/2020/05/06/YEMQ8f.png)
-
-### 个人中心
-
-![YElTUA.png](https://s1.ax1x.com/2020/05/06/YElTUA.png)
-
-### 健康码
-
-二维码调用的api为`http://qr.liantu.com/api.php?text=`
-右图为美化~~丑化~~版
-![YE1i80.png](https://s1.ax1x.com/2020/05/06/YE1i80.png) ![YElbCt.png](https://s1.ax1x.com/2020/05/06/YElbCt.png)
+以后再说……
