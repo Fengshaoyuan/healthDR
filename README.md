@@ -6,23 +6,23 @@
 
 目前已基本完成开发，实现的功能及演示如下：
 
-### 用户登录（由第一小组实现）
+**用户登录（由第一小组实现）**
 
 ![YfzKns.png](https://s1.ax1x.com/2020/05/18/YfzKns.png) ![YfzMBn.png](https://s1.ax1x.com/2020/05/18/YfzMBn.png)
 
-### 每日打卡
+**每日打卡**
 
 ![YfzDN6.png](https://s1.ax1x.com/2020/05/18/YfzDN6.png) ![Yfz63D.png](https://s1.ax1x.com/2020/05/18/Yfz63D.png)
 
-###　个人中心
+**个人中心**
 
 ![Yfzcge.png](https://s1.ax1x.com/2020/05/18/Yfzcge.png)
 
-###　健康码
+**健康码**
 
 ![YfzWDA.png](https://s1.ax1x.com/2020/05/18/YfzWDA.png)　![YfzTC8.png](https://s1.ax1x.com/2020/05/18/YfzTC8.png)
 
-### 设置打卡提醒
+**设置打卡提醒**
 
 ![YfzTC8.png](https://s1.ax1x.com/2020/05/18/YfzTC8.png)
 
