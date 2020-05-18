@@ -24,7 +24,7 @@
 
 **设置打卡提醒**
 
-![YfzTC8.png](https://s1.ax1x.com/2020/05/18/YfzTC8.png)
+![YfzvEq.png](https://s1.ax1x.com/2020/05/18/YfzvEq.png)
 
 ## 健康打卡 v0.4
 
