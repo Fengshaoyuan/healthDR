@@ -1,7 +1,12 @@
 // pages/PersonalCenter/PersonalCenter.js
 Page({
   _handlerTap: function(e) {
-    if(e.currentTarget.id == "QRcode") {
+    if(e.currentTarget.id == "myInfo") {
+      wx.navigateTo({
+        url: '/pages/MyInfo/MyInfo'
+      })   
+    }
+    else if(e.currentTarget.id == "QRcode") {
       wx.navigateTo({
         url: '/pages/QRcode/QRcode'
       })   
@@ -18,10 +23,10 @@ Page({
   data: {
     cardItems: [
       {
-        name: "message",
+        name: "myInfo",
         title: "个人信息",
         img: "/images/personalMsg.png",
-        description: "修改个人信息"
+        description: "查看个人信息"
       },{
         name: "QRcode",
         title: "我的健康码",

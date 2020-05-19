@@ -65,7 +65,7 @@ Page({
       wx.cloud.callFunction({
         name: 'getOpenID',
         complete: res => {
-          console.log("OpenID: ", res.result.userInfo.openId);
+          //console.log("OpenID: ", res.result.userInfo.openId);
           OpenID = res.result.userInfo.openId;
         }
       })

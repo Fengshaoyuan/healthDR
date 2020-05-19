@@ -1,18 +1,36 @@
 <!--miniprogram/pages/SetAlarm/SetAlarm.wxml-->
 <!-- 创建时间滚动条，确认按钮与文字说明 -->
-<view class="section">  
-<!-- 设置时间滚动条的可修改范围为6:00-11:59 -->
-  <picker mode="time" value="{{time}}" start="06:00" end="11:59" bindchange="bindTimeChange">  
-    <view class="picker">  
-     提醒时间 : {{times}}
-    </view>  
-  </picker>  
-</view> 
-<view class="btn">
-  <button bindtap="permission">确定设置</button>
+
+<view class="weui-form__tips-area">
+	<view class="m_weui-form__tips">
+	</view>
 </view>
-<text class="comments"><text class="tip">*</text>当前仅限设置次日提醒时间为6:00-11:59</text>
+<view class="weui-form__tips-area">
+	<view class="m_weui-form__tips">
+	</view>
+</view>
 
+<view class="weui-cells__title">设置提醒</view>
+<view class="weui-cells weui-cells_after-title">
 
+	<view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+		<view class="weui-cell__hd">
+			<view class="weui-label">提醒时间</view>
+		</view>
+		<view class="weui-cell__bd">
+			<picker mode="time" value="{{time}}" start="06:00" end="11:59" bindchange="bindTimeChange">
+				<view class="weui-select weui-select_in-select-after">{{times}}</view>
+			</picker>
+		</view>
+	</view>
+</view>
 
-
+<view class="weui-cells__title"></view>
+<view class="weui-form__tips-area">
+	<view class="m_weui-form__tips">
+		当前仅限设置次日提醒时间为6:00-11:59
+	</view>
+</view>
+<view class="weui-form__opr-area">
+	<a class="weui-btn weui-btn_primary" bindtap="permission">确定设置</a>
+</view>

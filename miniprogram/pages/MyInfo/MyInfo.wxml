@@ -1,0 +1,36 @@
+<!--miniprogram/pages/UserInfo/UserInfo.wxml-->
+<view class="userinfo">
+	<button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar" style="background-image: url({{userInfo.avatarUrl}})" size="default"></button>
+	<view class="userinfo-nickname-wrapper">
+		<button class="userinfo-nickname" bindtap="onGetOpenid">{{userInfo.nickName}}</button>
+		<!--<view class="nickname">{{userInfo.nickName}}</view>-->
+	</view>
+</view>
+
+<view class="weui-cells__title">个人信息</view>
+<view class="weui-cells weui-cells_form">
+	<view class="weui-cell weui-cell_active weui-cell_disabled">
+		<view class="weui-cell__hd">
+			<label class="weui-label">姓名</label>
+		</view>
+		<view class="weui-cell__bd">
+			<input class="weui-input" value="{{realName}}" disabled />
+		</view>
+	</view>
+	<view class="weui-cell weui-cell_active weui-cell_disabled">
+		<view class="weui-cell__hd">
+			<label class="weui-label">学号</label>
+		</view>
+		<view class="weui-cell__bd">
+			<input class="weui-input" value="{{ZJUID}}" disabled />
+		</view>
+	</view>
+	<view class="weui-cell weui-cell_active weui-cell_disabled">
+		<view class="weui-cell__hd">
+			<label class="weui-label">学院</label>
+		</view>
+		<view class="weui-cell__bd">
+			<input class="weui-input" value="{{school}}" disabled />
+		</view>
+	</view>
+</view>

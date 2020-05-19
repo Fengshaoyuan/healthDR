@@ -8,14 +8,15 @@
     "pages/DailyReport/DailyReport",
     "pages/PersonalCenter/PersonalCenter",
     "pages/QRcode/QRcode",
-    "pages/SetAlarm/SetAlarm"
+    "pages/SetAlarm/SetAlarm",
+    "pages/MyInfo/MyInfo"
   ],
   "window": {
-    "backgroundColor": "#eeeeee",
+    "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#4D4D4D",
+    "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "EMSS 疫情防控系统",
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },
   "tabBar": {
@@ -33,7 +34,7 @@
         "pagePath": "pages/DailyReport/DailyReport",
         "text": "健康打卡",
         "iconPath": "images/tabbar/daka_nor.png",
-        "selectedIconPath": "images/tabbar/daka_sel.png"
+        "selectedIconPath": "images/tabbar/daka_nor.png"
       },
       {
         "selectedIconPath": "images/news.png",
@@ -51,7 +52,7 @@
         "pagePath": "pages/PersonalCenter/PersonalCenter",
         "text": "个人中心",
         "iconPath": "images/tabbar/center_nor.png",
-        "selectedIconPath": "images/tabbar/center_sel.png"
+        "selectedIconPath": "images/tabbar/center_nor.png"
       }
     ]
   },

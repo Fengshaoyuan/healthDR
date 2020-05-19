@@ -18,27 +18,45 @@ Page({
     },
   },
 
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
     //查看是否授权
-    
+
     wx.getSetting({
       success: function (res) {
         if (res.authSetting['scope.userInfo']) {
           console.log("用户授权了");
-          wx.switchTab({
-            url: '../../pages/PersonalCenter/PersonalCenter'
+          
+          // 判断是否注册
+          wx.cloud.callFunction({
+            name: 'getUserInfo'
+          }).then(res => {
+            console.log("findResult", res)
+            console.log("size", res.result.data.length)
+            if (res.result.data.length == 1) {
+              console.log("用户已注册", res.result)
+              wx.switchTab({
+                url: '../../pages/PersonalCenter/PersonalCenter'
+              })
+            } else {
+              console.log("用户未注册", res.result)
+              wx.redirectTo({
+                url: '../../pages/signup/signup'
+              })
+            }
           })
+
         } else {
           //用户没有授权
           console.log("用户没有授权");
         }
       }
     });
-    
+
   },
   bindGetUserInfo: function (res) {
     if (res.detail.userInfo) {
@@ -51,28 +69,19 @@ Page({
       that.setData({
         isHide: false
       });
-      // 获取用户OpenID
+      //判断是否注册
       wx.cloud.callFunction({
-        name: 'getOpenID',
-        complete: res => {
-          console.log("OpenID: ", res.result.openId);
-          OpenID = res.result.openId;
-        }
-      })
-      // 判断该用户是否注册：
-      wx.cloud.callFunction({
-        name: 'addUserInfo2Cloud',
-        data: {
-          OpenID: OpenID
-        }
+        name: 'getUserInfo'
       }).then(res => {
-        if (res.result == 1) {
-          console.log("用户已注册",res.result)
-          wx.redirectTo({
+        console.log("findResult", res)
+        console.log("size", res.result.data.length)
+        if (res.result.data.length == 1) {
+          console.log("用户已注册", res.result)
+          wx.switchTab({
             url: '../../pages/PersonalCenter/PersonalCenter'
           })
         } else {
-          console.log("用户未注册",res.result)
+          console.log("用户未注册", res.result)
           wx.redirectTo({
             url: '../../pages/signup/signup'
           })
@@ -142,5 +151,7 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+
 })
