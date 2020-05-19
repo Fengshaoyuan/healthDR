@@ -217,15 +217,20 @@ Page({
           name: inputInfo.name
         }
       }).then(res => {
-        console.log("upload result:", res)
+        if (res.result != 1) {
+          console.log("upload failed!", res.result)
+          this.setData({
+            ErrMessage: "个人信息填写有误：该学/工号已注册"
+          })
+          return
+        } else {
+          console.log("upload result:", res)
+          console.log("用户信息注册完成:", inputInfo)
+          // 进入主界面
+          wx.switchTab({
+            url: '/pages/QR/QR'
+          })
+        }
       })
-      .catch(console.error)
-
-    console.log("用户信息注册完成:", inputInfo)
-    
-    // 进入主界面
-    wx.switchTab({
-      url: '/pages/PersonalCenter/PersonalCenter'
-    })
   }
 })

@@ -1,6 +1,9 @@
 // miniprogram/pages/login.js
 // https://blog.csdn.net/songokok/article/details/81237112
 // https://www.jianshu.com/p/524c587f33d3
+//用于存储用户唯一的OpenID
+var OpenID = ""
+
 Page({
   mixins: [require('../../mixin/themeChanged')],
   /**
@@ -48,8 +51,32 @@ Page({
       that.setData({
         isHide: false
       });
-      wx.redirectTo({
-        url: '../../pages/signup/signup'
+      // 获取用户OpenID
+      wx.cloud.callFunction({
+        name: 'getOpenID',
+        complete: res => {
+          console.log("OpenID: ", res.result.userInfo.openId);
+          OpenID = res.result.userInfo.openId;
+        }
+      })
+      // 判断该用户是否注册：
+      wx.cloud.callFunction({
+        name: 'addUserInfo2Cloud',
+        data: {
+          OpenID: OpenID
+        }
+      }).then(res => {
+        if (res.result == 1) {
+          console.log("用户已注册",res.result)
+          wx.redirectTo({
+            url: '../../pages/QR/QR'
+          })
+        } else {
+          console.log("用户未注册",res.result)
+          wx.redirectTo({
+            url: '../../pages/signup/signup'
+          })
+        }
       })
     } else {
       //用户按了拒绝按钮
