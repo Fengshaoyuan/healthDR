@@ -24,13 +24,13 @@ Page({
   onLoad: function (options) {
     var that = this;
     //查看是否授权
-    /*
+    
     wx.getSetting({
       success: function (res) {
         if (res.authSetting['scope.userInfo']) {
           console.log("用户授权了");
-          wx.redirectTo({
-            url: '../../pages/homepage/homepage'
+          wx.switchTab({
+            url: '../../pages/PersonalCenter/PersonalCenter'
           })
         } else {
           //用户没有授权
@@ -38,7 +38,7 @@ Page({
         }
       }
     });
-    */
+    
   },
   bindGetUserInfo: function (res) {
     if (res.detail.userInfo) {
@@ -55,8 +55,8 @@ Page({
       wx.cloud.callFunction({
         name: 'getOpenID',
         complete: res => {
-          console.log("OpenID: ", res.result.userInfo.openId);
-          OpenID = res.result.userInfo.openId;
+          console.log("OpenID: ", res.result.openId);
+          OpenID = res.result.openId;
         }
       })
       // 判断该用户是否注册：
@@ -69,7 +69,7 @@ Page({
         if (res.result == 1) {
           console.log("用户已注册",res.result)
           wx.redirectTo({
-            url: '../../pages/QR/QR'
+            url: '../../pages/PersonalCenter/PersonalCenter'
           })
         } else {
           console.log("用户未注册",res.result)

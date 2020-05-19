@@ -228,7 +228,7 @@ Page({
           console.log("用户信息注册完成:", inputInfo)
           // 进入主界面
           wx.switchTab({
-            url: '/pages/QR/QR'
+            url: '/pages/PersonalCenter/PersonalCenter'
           })
         }
       })
