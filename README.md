@@ -1,6 +1,24 @@
 # EMSS疫情防控系统
 
-# 健康打卡子系统
+## EMSS增量1_v0.9
+基本交互已完成  
+在 *健康打卡 v1.0* 版本的基础上进行了修改微调，完善了与基础数据模块的衔接：
+1. 完善了注册数据时的OpenID唯一性判断
+2. 授权模块新增是否已注册判定
+
+
+### 逻辑问题：
+1. 每日健康打卡上报可以重复填写
+2. 健康码逻辑判定过于简单
+3. 健康码不包括个人信息、时间等要素
+
+### 设计问题：
+1. UI设计不统一，各小组**务必采用(WEUI)[https://github.com/Tencent/weui-wxss?tdsourcetag=s_pctim_aiomsg]作为设计规范！**
+**务必采用(WEUI)[https://github.com/Tencent/weui-wxss?tdsourcetag=s_pctim_aiomsg]作为设计规范！**
+**务必采用(WEUI)[https://github.com/Tencent/weui-wxss?tdsourcetag=s_pctim_aiomsg]作为设计规范！**
+
+### 其他问题：
+1. 问卷数据库字段名看不懂
 
 ## 健康打卡 v1.0
 
