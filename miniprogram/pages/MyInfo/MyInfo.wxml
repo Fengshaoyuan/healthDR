@@ -33,4 +33,20 @@
 			<input class="weui-input" value="{{school}}" disabled />
 		</view>
 	</view>
+	<view class="weui-cell weui-cell_active weui-cell_disabled">
+		<view class="weui-cell__hd">
+			<label class="weui-label">专业</label>
+		</view>
+		<view class="weui-cell__bd">
+			<input class="weui-input" value="{{major}}" disabled />
+		</view>
+	</view>
+	<view class="weui-cell weui-cell_active weui-cell_disabled">
+		<view class="weui-cell__hd">
+			<label class="weui-label">班级</label>
+		</view>
+		<view class="weui-cell__bd">
+			<input class="weui-input" value="{{class}}" disabled />
+		</view>
+	</view>
 </view>

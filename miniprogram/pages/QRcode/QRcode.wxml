@@ -1,7 +1,7 @@
 <!-- 基础信息 -->
 <view class="msg">
-  <view>姓名:<text class="data">{{realname}}</text></view> 
-  <view>学号:<text class="data">{{studentID}}</text></view> 
+  <view>姓名:<text class="data">{{realName}}</text></view> 
+  <view>学号:<text class="data">{{ZJUID}}</text></view> 
   <view>学院:<text class="data">{{college}}</text></view> 
 </view>
 

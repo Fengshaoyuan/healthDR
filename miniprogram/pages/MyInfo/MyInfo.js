@@ -15,6 +15,8 @@ Page({
     realName: "",
     ZJUID: "",
     school: "",
+    major: "",
+    class: ""
 
   },
 
@@ -44,6 +46,8 @@ Page({
           realName: res.result.data[0].name,
           ZJUID: res.result.data[0].ZJUID,
           school: res.result.data[0].school,
+          major: res.result.data[0].major,
+          class: res.result.data[0].class,
         })
       })
 

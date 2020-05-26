@@ -11,7 +11,7 @@
   </view>
   <view class="baseMsg">
     <view class="desc">学工号 Student/Staff ID No.</view>
-    <text>{{message.studentID}}</text>
+    <text>{{message.ZJUID}}</text>
   </view>
 
   <!-- 问卷主体 -->

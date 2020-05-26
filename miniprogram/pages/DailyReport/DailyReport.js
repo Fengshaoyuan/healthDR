@@ -200,7 +200,7 @@ Page({
     message: {
       date: "",
       realName: "",
-      studentID: "",
+      ZJUID: "",
       location: null,
       sfzx:1,
       sfcxtz:1,
@@ -541,39 +541,15 @@ Page({
     })
 
     //初始化个人信息
-    this.initialization()
-  },
-  initialization(e) {
     wx.cloud.callFunction({
-      name: 'getOpenID',
-      complete: res => {
-        let OpenID = res.result.userInfo.openId;
-        console.log(OpenID)
-        const db = wx.cloud.database()
-        // 查询当前用户所有的 counters
-        db.collection('UserInfo').where({
-          OpenID: OpenID
-        }).get({
-          success: res => {
-            let arr = res.data[0]
-            console.log(arr)
-            this.setData({
-              "message.realName": arr.name,
-              "message.studentID": arr.ZJUID,
-            })
-            console.log('[数据库] [查询记录] 成功: ', res)
-          },
-          fail: err => {
-            wx.showToast({
-              icon: 'none',
-              title: '初始化个人信息失败'
-            })
-            console.error('[数据库] [查询记录] 失败：', err)
-          }
-        })
-      }
+      name: 'getUserInfo'
+    }).then(res => {
+      console.log(res)
+      this.setData({
+        'message.realName': res.result.data[0].name,
+        'message.ZJUID': res.result.data[0].ZJUID,
+      })
     })
-    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
