@@ -34,7 +34,7 @@
         "pagePath": "pages/DailyReport/DailyReport",
         "text": "健康打卡",
         "iconPath": "images/tabbar/daka_nor.png",
-        "selectedIconPath": "images/tabbar/daka_nor.png"
+        "selectedIconPath": "images/tabbar/daka_sel.png"
       },
       {
         "selectedIconPath": "images/news.png",
@@ -52,7 +52,7 @@
         "pagePath": "pages/PersonalCenter/PersonalCenter",
         "text": "个人中心",
         "iconPath": "images/tabbar/center_nor.png",
-        "selectedIconPath": "images/tabbar/center_nor.png"
+        "selectedIconPath": "images/tabbar/center_sel.png"
       }
     ]
   },

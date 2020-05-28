@@ -16,7 +16,7 @@
 .location {
   padding: 12rpx 18rpx;
   display: inline-block;
-  font-size: medium;
+  font-size: 30rpx;
   border: 2rpx solid #eee;
   width: 95%;
   vertical-align: middle;
@@ -32,21 +32,24 @@
   display: flex;
 }
 
+.radio {
+  display: flex;
+  color: #4285f4;
+  size: 20rpx;
+}
+
 .value {
   font-size: 30rpx;
 }
 
-.inputs {
+.answer {
+  font-size:30rpx;
+  width: 100%;
   margin-left: 10rpx;
-  word-break:keep-all;
 }
 
-.answer {
-  font-size:25rpx;
-  height:60rpx;
-  width: 100%;
-  display: block;
-  overflow: auto;
+.location{
+  font-size: 30rpx;
 }
 
 .confirm {

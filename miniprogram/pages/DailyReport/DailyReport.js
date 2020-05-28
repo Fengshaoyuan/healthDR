@@ -8,7 +8,7 @@ Page({
     let str1 = "message." + name
     let str2 = "questionnaire[" + index + "].choice"
 
-    if(name == "brcn") {
+    if(name == "brcn" && !this.data.todayIfSubmited) {
       this.setData({
         canSubmit: true,
       })
@@ -163,60 +163,112 @@ Page({
   },
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    //把数据给云数据库
-    const db = wx.cloud.database({})
-    const cont = db.collection('HealthData')
-    console.log(this.data.message)
-    let that = this
-    cont.add({
-      data: that.data.message,
-      success: function (res) {
-        console.log(res._id)
-        wx.showModal({
-          title: '成功',
-          content: '今日打卡信息已上报',
-          showCancel: false,
-        })
-        that.setData({
-          canSubmit: false
-        })
-      },
-      fail: function(res) {
-        wx.showModal({
-          title: '失败',
-          content: '上报失败',
-          showCancel: false
-        })
-      }
-    });
+    if (this.data.todayIfSubmited) {
+      wx.showModal({
+        title: '今日已提交',
+        content: '不需要重复提交',
+        showCancel: false
+      })
+    }
+    else {
+      //把数据给云数据库
+      const db = wx.cloud.database({})
+      const cont = db.collection('HealthData')
+      console.log(this.data.message)
+      let that = this
+      cont.add({
+        data: that.data.message,
+        success: function (res) {
+          console.log(res._id)
+          wx.showModal({
+            title: '成功',
+            content: '今日打卡信息已上报',
+            showCancel: false,
+          })
+          that.setData({
+            canSubmit: false
+          })
+        },
+        fail: function(res) {
+          wx.showModal({
+            title: '失败',
+            content: '上报失败',
+            showCancel: false
+          })
+        }
+      });
+    }
   },
   
   /**
    * 页面的初始数据
    */
   data: {
+    todayIfSubmited: false,
     canSubmit: false, //是否可以点击提交按钮
     // 基础信息和问题选择结果数据，这是用于上传的数据
     message: {
       date: "",
       realName: "",
       ZJUID: "",
-      location: null,
-      sfzx:1,
-      sfcxtz:1,
-      sfzgn: 0,
-      sffrqjwdg: 1,
-      sfqtyyqjwdg: 1,
-      tw: 1,
-      sfyyjc: 1,
-      sfjcys: 1,
-      sfjcqz: 1,
-      jrsfqzys: 1,
-      jrdqtlqk: 8,
-      sfhsjc: 1,
-      sfcxzysx: 1,
-      sfsqhzjkk: 1,
-      sfymqjczrj: 1
+      sfzx: null,
+      fxyy: null,
+      sfzgn: null,
+      szdd: null,
+      bztcyy: null,
+      sffrqjwdg: null,
+      sfqtyyqjwdg: null,
+      tw: null,
+      sfcxtz: null,
+      sfyyjc: null,
+      jcjgqr: null,
+      gcjg: null,
+      jcjg: null,
+      sfjcys: null,
+      jcbhrq: null,
+      sfjcqz: null,
+      jcqzrq: null,
+      sfyqjzgc: null,
+      sfcyglq: null,
+      sfjcqz: null,
+      jrsfqzys: null,
+      jrdqtlqk: null,
+      sfhsjc: null,
+      sfcxzysx: null,
+      qksm: null,
+      sfsqhzjkk: null,
+      sqhzjkkys: null,
+      sfymqjczrj: null,
+      zjdfgj: null,
+      sfyrjjh: null,
+      cfgj: null,
+      tjgj: null,
+      nrjrq: null,
+      rjka: null,
+      jnmdd: null,
+      rjjtfs: null,
+      rjjtgjbc: null,
+      jnjtfs: null,
+      jnjtgjbc: null,
+
+      // date: "",
+      // realName: "",
+      // ZJUID: "",
+      // location: null,
+      // sfzx:0,
+      // sfcxtz:1,
+      // sfzgn: 0,
+      // sffrqjwdg: 1,
+      // sfqtyyqjwdg: 1,
+      // tw: 1,
+      // sfyyjc: 1,
+      // sfjcys: 1,
+      // sfjcqz: 1,
+      // jrsfqzys: 1,
+      // jrdqtlqk: null,
+      // sfhsjc: 1,
+      // sfcxzysx: null,
+      // sfymqjczrj: 1
     },
     // 问卷数据
     questionnaire: [
@@ -227,7 +279,7 @@ Page({
         visible: true,
         desc: "今日是否在校？ Are you on campus today?",
         option: ["是 Yes" ,"否 No"],
-        choice: 1,
+        choice: null,
       },{
         id: 1,
         type: 2,
@@ -419,7 +471,7 @@ Page({
         visible: true,
         desc: "是否已经申领校区所在地健康码？Have you got the health code of the city where the campus is located？",
         option: ["是 Yes" ,"否 No" ],
-        choice: 0,
+        choice: null,
       },{
         id: 26,
         type: 1,
@@ -427,7 +479,7 @@ Page({
         visible: false,
         desc: "今日申领校区所在地健康码的颜色？What's the color of today's health code？",
         option: ["绿码 Green code" ,"红码 Red code" ,"黄码 Yellow code" ,"橙码 Orange code" ],
-        choice: 0,
+        choice: null,
       },{
         id: 27,
         type: 1,
@@ -540,6 +592,7 @@ Page({
     'message.date': DATE
     })
 
+    
     //初始化个人信息
     wx.cloud.callFunction({
       name: 'getUserInfo'
@@ -550,7 +603,102 @@ Page({
         'message.ZJUID': res.result.data[0].ZJUID,
       })
     })
+
+    this.initialization()
+
   },
+  initialization(e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    let that = this
+    const db = wx.cloud.database()
+    db.collection('HealthData').where({
+      _openid:  wx.getStorageSync('id')// 填入当前用户 openid
+    }).get({
+      success: function(res) {
+        //获取上次的打卡数据并重写message
+        var arr = res.data[res.data.length-1];
+        for(var key in that.data.message) {
+          if (key == "date") {
+            that.setData({
+              'todayIfSubmited': arr.date == that.data.message.date
+            })
+          }
+          console.log(key,arr[key])
+          var str = "message." + key
+          if(arr[key] != undefined) {
+            that.setData({
+              [str]: arr[key]
+            })
+          }
+        }
+
+        //初始化问题选择
+        for (let i = 0; i < that.data.questionnaire.length; i++) {
+          var name = that.data.questionnaire[i].name
+          var type = that.data.questionnaire[i].type
+          var value = arr[name]
+          if (value == undefined) {
+            continue
+          }
+          var strx
+          switch (type) {
+            case 1: 
+              strx = "questionnaire[" + i +"].choice"
+              break
+            case 2: 
+              strx = "questionnaire[" + i +"].answer"
+              break
+            case 4: 
+              strx = "questionnaire[" + i +"].date"
+              break
+          }
+          that.setData({
+            [strx]: value
+          })
+        }
+
+        that.setData({
+          // 页面初始化,二级问题是否显示取决于一级问题是否默认选中
+          'questionnaire[1].visible': (that.data.questionnaire[0].choice == 0),
+          'questionnaire[9].visible': (that.data.questionnaire[6].choice == 0 || that.data.questionnaire[7].choice == 0),
+          'questionnaire[10].visible': (that.data.questionnaire[9].choice == 0),
+          'questionnaire[11].visible': (that.data.questionnaire[9].choice == 0),
+          'questionnaire[12].visible': (that.data.questionnaire[9].choice == 0),
+          'questionnaire[14].visible': (that.data.questionnaire[13].choice == 0),
+          'questionnaire[16].visible': (that.data.questionnaire[13].choice == 0),
+          'questionnaire[17].visible': (that.data.questionnaire[13].choice == 0 || that.data.questionnaire[14].choice == 0),
+          'questionnaire[18].visible': (that.data.questionnaire[13].choice == 0 || that.data.questionnaire[14].choice == 0),
+          'questionnaire[19].visible': (that.data.questionnaire[18].choice == 0),
+          'questionnaire[24].visible': (that.data.questionnaire[20].choice == 0),
+          'questionnaire[26].visible': (that.data.questionnaire[25].choice == 0),
+          'questionnaire[28].visible': (that.data.questionnaire[2].choice == 1),
+          'questionnaire[29].visible': (that.data.questionnaire[27].choice == 0),
+          'questionnaire[30].visible': (that.data.questionnaire[29].choice == 0),
+          'questionnaire[31].visible': (that.data.questionnaire[29].choice == 0),
+          'questionnaire[32].visible': (that.data.questionnaire[29].choice == 0),
+          'questionnaire[33].visible': (that.data.questionnaire[29].choice == 0),
+          'questionnaire[34].visible': (that.data.questionnaire[29].choice == 0),
+          'questionnaire[35].visible': (that.data.questionnaire[29].choice == 0),
+          'questionnaire[36].visible': (that.data.questionnaire[29].choice == 0),
+          'questionnaire[37].visible': (that.data.questionnaire[29].choice == 0),
+          'questionnaire[38].visible': (that.data.questionnaire[29].choice == 0),
+        })
+      wx.hideLoading()
+      },
+      fail: function(res) {
+        wx.showModal({
+          title: '失败',
+          content: '未查询到上次的打卡信息',
+          showCancel: false
+        })
+        wx.hideLoading()
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -562,32 +710,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      // 页面初始化
-      'questionnaire[1].visible': (this.data.questionnaire[0].choice == 0),
-      'questionnaire[9].visible': (this.data.questionnaire[6].choice == 0 || this.data.questionnaire[7].choice == 0),
-      'questionnaire[10].visible': (this.data.questionnaire[9].choice == 0),
-      'questionnaire[11].visible': (this.data.questionnaire[9].choice == 0),
-      'questionnaire[12].visible': (this.data.questionnaire[9].choice == 0),
-      'questionnaire[14].visible': (this.data.questionnaire[13].choice == 0),
-      'questionnaire[16].visible': (this.data.questionnaire[13].choice == 0),
-      'questionnaire[17].visible': (this.data.questionnaire[13].choice == 0 || this.data.questionnaire[14].choice == 0),
-      'questionnaire[18].visible': (this.data.questionnaire[13].choice == 0 || this.data.questionnaire[14].choice == 0),
-      'questionnaire[19].visible': (this.data.questionnaire[18].choice == 0),
-      'questionnaire[24].visible': (this.data.questionnaire[20].choice == 0),
-      'questionnaire[26].visible': (this.data.questionnaire[25].choice == 0),
-      'questionnaire[28].visible': (this.data.questionnaire[2].choice == 1),
-      'questionnaire[29].visible': (this.data.questionnaire[27].choice == 0),
-      'questionnaire[30].visible': (this.data.questionnaire[29].choice == 0),
-      'questionnaire[31].visible': (this.data.questionnaire[29].choice == 0),
-      'questionnaire[32].visible': (this.data.questionnaire[29].choice == 0),
-      'questionnaire[33].visible': (this.data.questionnaire[29].choice == 0),
-      'questionnaire[34].visible': (this.data.questionnaire[29].choice == 0),
-      'questionnaire[35].visible': (this.data.questionnaire[29].choice == 0),
-      'questionnaire[36].visible': (this.data.questionnaire[29].choice == 0),
-      'questionnaire[37].visible': (this.data.questionnaire[29].choice == 0),
-      'questionnaire[38].visible': (this.data.questionnaire[29].choice == 0),
-    })
+    
   },
 
   /**
