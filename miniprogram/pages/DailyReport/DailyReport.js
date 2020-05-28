@@ -165,7 +165,8 @@ Page({
     }
   },
   formSubmit(e) {
-    for (let i = 0; i < this.data.questionnaire.length; i++) {
+    // 判断是否有问题未填写
+    for (let i = 0; i < this.data.questionnaire.length - 1; i++) {
       if(this.data.questionnaire[i].visible && this.data.questionnaire[i].value == null) {
         this.setData({
           toView:'toView' + this.data.questionnaire[i].name,
@@ -179,31 +180,30 @@ Page({
         return
       }
     }
-    console.log("提交成功")
-    //   //把数据给云数据库
-    //   const db = wx.cloud.database({})
-    //   const cont = db.collection('HealthData')
-    //   let that = this
-    //   cont.add({
-    //     data: that.data.message,
-    //     success: function (res) {
-    //       wx.showModal({
-    //         title: '成功',
-    //         content: '今日打卡信息已上报',
-    //         showCancel: false,
-    //       })
-    //       that.setData({
-    //         canSubmit: false
-    //       })
-    //     },
-    //     fail: function(res) {
-    //       wx.showModal({
-    //         title: '失败',
-    //         content: '上报失败',
-    //         showCancel: false
-    //       })
-    //     }
-    //   });
+    //把数据给云数据库
+    const db = wx.cloud.database({})
+    const cont = db.collection('HealthData')
+    let that = this
+    cont.add({
+      data: that.data.message,
+      success: function (res) {
+        wx.showModal({
+          title: '成功',
+          content: '今日打卡信息已上报',
+          showCancel: false,
+        })
+        that.setData({
+          canSubmit: false
+        })
+      },
+      fail: function(res) {
+        wx.showModal({
+          title: '失败',
+          content: '上报失败',
+          showCancel: false
+        })
+      }
+    });
   },
   
   /**
