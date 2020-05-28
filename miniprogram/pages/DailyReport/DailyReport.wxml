@@ -15,18 +15,18 @@
   </view>
 
   <!-- 问卷主体 -->
-  <view class="questionContainer">
+  <scoll-view class="questionContainer" scroll-y scroll-with-animation='true' scroll-into-view="{{toView}}}">
     <!-- 问题列表渲染 -->
     <block wx:for="{{questionnaire}}" wx:key="id" wx:for-item="question">
       <!-- 使用hidden隐藏不可见的问题，不会降低页面的渲染性能 -->
-      <view class="questionMsg" hidden="{{!question.visible}}">
+      <view class="questionMsg" id="{{'toView' + question.name}}" hidden="{{!question.visible}}">
         <view class="desc">{{question.desc}}</view>
 
         <!-- 单选 -->
-        <view class="option" wx:if="{{question.type==1}}">
+        <view class="option"wx:if="{{question.type==1}}">
           <radio-group name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" class="radio-group" bindchange="radioChange" >
             <label class="optionItem" wx:for="{{question.option}}" wx:key="id" wx:for-item="option"> 
-              <radio class="radio" value="{{index}}" checked="{{question.choice == index}}" color="#4285f4"/>
+              <radio class="radio" value="{{index}}" checked="{{question.value == index}}" color="#4285f4"/>
               <text class="value">{{option}}</text>
             </label>
           </radio-group>
@@ -35,26 +35,26 @@
         <!-- 不同类型的问题采用不同的渲染方式 -->
         <!-- 文本信息输入 -->
         <view wx:elif="{{question.type==2}}">
-          <textarea name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" class="answer" placeholder="{{question.answer ? question.answer : '在此输入信息'}}" bindinput="inputChange" auto-height/>
+          <textarea name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" class="answer" placeholder="{{question.value ? question.value : '在此输入信息'}}" bindinput="inputChange" auto-height/>
         </view>
 
         <!-- 地理位置获取 -->
         <view wx:elif="{{question.type==3}}" bindtap="_getLocatin">
-          <text class="location" name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" class="location">{{message.location ? message.location : "点击获取地理位置(Click to get your location)"}}</text>
+          <text class="location" name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" class="location">{{question.value ? question.value : "点击获取地理位置(Click to get your location)"}}</text>
         </view>
         
         <!-- 日期选择 -->
         <view wx:elif="{{question.type==4}}">
           <picker name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="dateChange">
             <view class="picker">
-              当前选择: {{question.date}}
+              当前选择: {{question.value ? question.value : ""}}
             </view>
           </picker>
         </view>
       </view>
     </block>
-  </view>
+  </scoll-view>
 
-  <button class="confirm" formType="submit" disabled="{{!canSubmit}}" hover-class="sub_hover_btn" hover-start-time="20" hover-stay-time="100">{{todayIfSubmited ? "今日已提交" : "提交信息 Submit information"}}</button> 
+  <button class="confirm" formType="submit" disabled="{{!canSubmit}}" hover-class="sub_hover_btn" hover-start-time="20" hover-stay-time="100">{{todayIfSubmited ? "今日已提交 Submitted today" : "提交信息 Submit information"}}</button> 
 
 </form>

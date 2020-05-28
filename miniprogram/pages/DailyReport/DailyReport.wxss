@@ -1,3 +1,7 @@
+.questionContainer {
+  height: 100vh;
+}
+
 .baseMsg{
   border-bottom: 2rpx solid #e5e5e5;
   margin: 10rpx 18rpx;
@@ -30,6 +34,7 @@
 
 .optionItem {
   display: flex;
+  margin-top: 10rpx;
 }
 
 .radio {
