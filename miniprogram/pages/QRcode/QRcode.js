@@ -52,20 +52,18 @@ Page({
         let color=res.data[res.data.length-1]
         console.log(res)
         let pars={"r":0,"g":100,"b":0}	
-        if(color.jrsfqzys==0){//红
-          pars={"r":255,"g":0,"b":0}	
-      
+        if(color.jrsfqzys==0){//红色
+          pars={"r":255,"g":0,"b":0}
+
         }else if(color.sfjcqz==0){//橙色
           pars={"r":255,"g":97,"b":0}	
-      
-        } else if(color.sfjcys==0){
-    //黄
-          pars={"r":0,"g":100,"b":0}	
-      
-        }else{
-          //吕
-          pars={"r":0,"g":100,"b":0}	
 
+        } else if(color.sfjcys==0){//黄色
+          pars={"r":255,"g":222,"b":0}    
+
+        }else{//绿色
+          pars={"r":0,"g":100,"b":0}	
+          
         }
         that.getcode( res.data[0]._id,pars)
         wx.hideLoading()
