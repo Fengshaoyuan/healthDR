@@ -45,7 +45,7 @@
         
         <!-- 日期选择 -->
         <view wx:elif="{{question.type==4}}">
-          <picker name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="dateChange">
+          <picker name="{{question.name}}" id="{{question.name}}" data-index="{{question.id}}" mode="date" value="{{date}}" start="2020-01-01" end="{{message.date}}" bindchange="dateChange">
             <view class="picker">
               当前选择: {{question.value ? question.value : ""}}
             </view>

@@ -145,7 +145,7 @@ Page({
       }
     })
   },
-  valueChange: function(e) {
+  dateChange: function(e) {
     console.log('picker发送选择改变，携带值为', e)
     let str2 = "questionnaire[" + e.currentTarget.dataset.index + "].value"
     this.setData({
@@ -606,6 +606,7 @@ Page({
       _openid:  wx.getStorageSync('id')// 填入当前用户 openid
     }).get({
       success: function(res) {
+        console.log(res)
         //获取上次的打卡数据并重写message
         var arr = res.data[res.data.length-1];
         console.log(arr)
@@ -680,7 +681,7 @@ Page({
       },
       fail: function(res) {
         wx.showModal({
-          title: '失败',
+          title: '提示',
           content: '未查询到上次的打卡信息',
           showCancel: false
         })
