@@ -10,9 +10,9 @@ Page({
     time: "",
     realName: "",
     ZJUID: "",
-    qr_url:"",
+    qr_url: "",
     college: "",
-    healthColor: "00a650"
+    healthColor: "DDDDDD",
   },
 
   /**
@@ -49,23 +49,18 @@ Page({
       _openid:  wx.getStorageSync('id')// 填入当前用户 openid
     }).get({
       success: function(res) {
-        let color=res.data[res.data.length-1]
-        console.log(res)
-        let pars={"r":0,"g":100,"b":0}	
-        if(color.jrsfqzys==0){//红色
-          pars={"r":255,"g":0,"b":0}
-
-        }else if(color.sfjcqz==0){//橙色
-          pars={"r":255,"g":97,"b":0}	
-
-        } else if(color.sfjcys==0){//黄色
-          pars={"r":255,"g":222,"b":0}    
-
-        }else{//绿色
-          pars={"r":0,"g":100,"b":0}	
-          
+        let arr=res.data[res.data.length-1]
+        var color = "00a650"
+        if(arr.jrsfqzys=="0"){//红色
+          color= "ff0000"
+        }else if(arr.sfjcqz=="0"){//橙色
+          color= "ffa500"
+        } else if(arr.sfjcys==0){//黄色
+          color= "ffff00"
         }
-        that.getcode( res.data[0]._id,pars)
+        that.setData({
+          healthColor: color
+        })
         wx.hideLoading()
       },
       fail: function(res) {
@@ -78,35 +73,7 @@ Page({
       }
     })
   },
-  getcode: function (id,pars) { 
-    var that=this
 
-    wx.cloud.callFunction({
-      name: 'getcode',
-      data: {
-        page: 'pages/news/news?scene='+id,
-        lineColor: pars,
-      }
-    }).then(res => {
-      console.log(res.result);
-      if (res.result.status == 0) {
-        that.setData({
-          qr_url: res.result.tempFileURL
-        })
-      }else{
-        wx.showToast({
-          icon: 'none',
-          title: '调用失败',
-        })
-      }
-    }).catch(err => {
-      console.error(err);
-      wx.showToast({
-        icon: 'none',
-        title: '调用失败',
-      })
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
