@@ -9,7 +9,9 @@
 <view class="QRcode">
   <view class="date">{{time}}</view>
   <!-- 使用的api为http://qr.liantu.com/api.php? 扫码结果为个人信息文字-->
-    <image src="http://qr.liantu.com/api.php?&fg={{healthColor}}&text=姓名：{{realName}}%0A学号：{{ZJUID}}%0A学院：{{college}}%0A更新时间：{{time}}" mode="heightFix" show-menu-by-longpress="{{true}}"/>
+    <!-- <image src="http://qr.liantu.com/api.php?&fg={{healthColor}}&text=姓名：{{realName}}%0A学号：{{ZJUID}}%0A学院：{{college}}%0A更新时间：{{time}}" mode="heightFix" show-menu-by-longpress="{{true}}"/> -->
+    <!-- 扫描结果为包含个人信息的图片 -->
+    <image src="http://qr.liantu.com/api.php?&bg=ffffff&fg={{healthColor}}&w=600&m=30&logo=http://pic.gerenjianli.com/xiaohui2046/b21.jpg&text=http://via.placeholder.com/1080x150/000000/{{healthColor}}/?text=ZJUID:{{ZJUID}}+updateTime:{{time}}" mode="widthFix" show-menu-by-longpress="{{true}}"/>
   <view class="tips">
     <text>让对方扫描此二维码进行身份认证</text>
   </view>

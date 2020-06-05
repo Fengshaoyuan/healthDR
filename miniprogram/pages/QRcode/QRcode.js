@@ -50,13 +50,13 @@ Page({
     }).get({
       success: function(res) {
         let arr=res.data[res.data.length-1]
-        var color = "00a650"
+        var color = "00cc00"
         if(arr.jrsfqzys=="0"){//红色
           color= "ff0000"
         }else if(arr.sfjcqz=="0"){//橙色
-          color= "ffa500"
-        } else if(arr.sfjcys==0){//黄色
-          color= "ffff00"
+          color= "FF5733"
+        } else if(arr.sfjcys==0 || arr.jrdqtlqk != 8){//黄色
+          color= "FFC300"
         }
         that.setData({
           healthColor: color

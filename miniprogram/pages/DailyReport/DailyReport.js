@@ -635,7 +635,9 @@ Page({
         // 将用户需手动勾选的选项值置为null
         arr.sfzx = null
         arr.szdd = null
+        arr.jrdqtlqk = null
         arr.sfymqjczrj = null
+        
         for (let i = 0; i < that.data.questionnaire.length; i++) {
           var name = that.data.questionnaire[i].name
           var value = arr[name]

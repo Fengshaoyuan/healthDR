@@ -28,6 +28,10 @@ page{background-color:#d9fcfc;}
   box-shadow: 0 6rpx 4rpx 4rpx #DDDDDD;
 }
 
+.QRcode image {
+  width: 600rpx;
+}
+
 .date {
   padding-top: 32rpx;
   font-size: larger;
