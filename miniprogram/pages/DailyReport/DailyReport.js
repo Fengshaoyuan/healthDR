@@ -626,11 +626,16 @@ Page({
             })
           }
         }
-        //记录上次打卡位置
+        // 记录上次打卡位置
         that.setData({
           'preLocation': that.data.message.szdd
         })
+        
         //初始化问卷信息
+        // 将用户需手动勾选的选项值置为null
+        arr.sfzx = null
+        arr.szdd = null
+        arr.sfymqjczrj = null
         for (let i = 0; i < that.data.questionnaire.length; i++) {
           var name = that.data.questionnaire[i].name
           var value = arr[name]
@@ -645,13 +650,6 @@ Page({
         }
 
         that.setData({
-          // 将用户需手动勾选的选项值置为null
-          'questionnaire[0].value': null,
-          'questionnaire[3].value': null,
-          'questionnaire[25].value': null,
-          'questionnaire[26].value': null,
-          'questionnaire[27].value': null,
-
           // 页面初始化,二级问题是否显示取决于一级问题是否默认选中
           'questionnaire[1].visible': (that.data.questionnaire[0].value == 0),
           'questionnaire[9].visible': (that.data.questionnaire[6].value == 0 || that.data.questionnaire[7].value == 0),
