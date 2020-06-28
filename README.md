@@ -1,3 +1,5 @@
+**完整小程序请至[微信git](https://git.weixin.qq.com/wx_wx000d5f14535c4623/healthDR)查看，github不再更新**
+
 # EMSS疫情防控系统
 
 ## 健康打卡_基于增量1_v1.1
